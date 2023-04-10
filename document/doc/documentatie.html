@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <title>Documentation</title>
+    <link rel="stylesheet" href="documentatie.css" />
+    <link rel="icon" type="image/x-icon" href="../images/Logo.png" />
+    <meta charset="UTF-8" />
+    <meta name="author" content="Munteanu Denis-Mihai" />
+    <meta
+      name="description"
+      content="Documentation of the Fruits on the web application."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+
+  <body style="background-image: none">
+    <article>
+      <header>
+        <div class="banner">
+          <img
+            src="../images/scholarly-html.png"
+            width="227"
+            height="50"
+            alt="Scholarly HTML logo"
+          />
+        </div>
+        <h1>Fruits On The Web</h1>
+      </header>
+
+      <div role="contentinfo">
+        <section typeof="sa:AuthorsList">
+          <h2>Authors</h2>
+
+          <ul>
+            <li typeof="sa:ContributorRole" property="schema:author">
+              <span typeof="schema:Person">
+                <meta property="schema:givenName" content="Rares-Vasilica" />
+                <meta property="schema:familyName" content="Dascalu" />
+                <span property="schema:name"
+                  >Dasc&#259;lu Rare&#351;-Vasilic&#259;</span
+                >
+              </span>
+
+              <ul>
+                <li
+                  property="schema:roleContactPoint"
+                  typeof="schema:ContactPoint"
+                >
+                  <a href="dascaluraresm@gmail.com" property="schema:email"
+                    >dascaluraresm@gmail.com</a
+                  >
+                </li>
+              </ul>
+            </li>
+
+            <li typeof="sa:ContributorRole" property="schema:author">
+              <span typeof="schema:Person">
+                <meta property="schema:givenName" content="Vlad" />
+                <meta property="schema:familyName" content="Metanie-Cotruta" />
+                <span property="schema:name"
+                  >Metanie-Cotru&#355;&#259; Vlad</span
+                >
+              </span>
+
+              <ul>
+                <li
+                  property="schema:roleContactPoint"
+                  typeof="schema:ContactPoint"
+                >
+                  <a href="vlad.metanie@gmail.com" property="schema:email"
+                    >vlad.metanie@gmail.com</a
+                  >
+                </li>
+              </ul>
+            </li>
+
+            <li typeof="sa:ContributorRole" property="schema:author">
+              <span typeof="schema:Person">
+                <meta property="schema:givenName" content="Denis" />
+                <meta property="schema:familyName" content="Munteanu" />
+                <span property="schema:name">Munteanu Denis</span>
+              </span>
+
+              <ul>
+                <li
+                  property="schema:roleContactPoint"
+                  typeof="schema:ContactPoint"
+                >
+                  <a href="denismunteanu673c@gmail.com" property="schema:email"
+                    >denismunteanu673c@gmail.com</a
+                  >
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+      </div>
+
+      <section>
+        <h3>1. Introduction</h3>
+
+        <section>
+          <h4>1.1 Purpose</h4>
+
+          <p>
+            The purpose of this document is to present a description of the web
+            application Fruits On The Web based on the project FrOW.
+          </p>
+          <p>
+            It will explain the purpose and features of the application, the
+            interface of the software, what it will do and the constraints under
+            which it must operate.
+          </p>
+          <p>
+            This document is intended for any potential users of the software.
+          </p>
+        </section>
+
+        <section>
+          <h4>1.2 Intended Audience and Reading Suggestions</h4>
+
+          <p>
+            This document is intended for any user that might wish to use the
+            Fruits On The Web web application.
+          </p>
+        </section>
+
+        <section>
+          <h4>1.3 Product Scope</h4>
+
+          <p>
+            Fruits On The Web has been developed with the intended purpose of
+            being an interactive game for primary school children.
+          </p>
+        </section>
+      </section>
+
+      <section>
+        <h3>2. Overall Description</h3>
+
+        <section>
+          <h3>2.1 Product Description</h3>
+
+          <p>
+            The Fruits on the Web web application is based on the FrOW project.
+          </p>
+          <p>
+            It is a game-type application meant for primary school children who
+            wish to learn about fruits and vegetables in an interactive way.
+          </p>
+          <p>
+            Users can play levels with different dificulties in which they must
+            complete the challenges within the given time to obtain the most
+            amount of points.
+          </p>
+        </section>
+
+        <section>
+          <h4>2.2 Product Functions</h4>
+
+          <p>
+            The web application is picturing a game. The pages within the
+            application are:
+          </p>
+
+          <p>
+            Home Page - central point of navigation to the rest of the pages
+            within the website
+          </p>
+
+          <ul>
+            <li>logo: the logo of the game</li>
+            <li>
+              menu: pulls out a menu containing the logout, help and about
+              pages.
+            </li>
+            <li>logout: redirects to the login page</li>
+            <li>help: redirects to the help page</li>
+            <li>about: redirects to the about page</li>
+            <li>username input: accepts the username of the player</li>
+            <li>start new game button: redirects to the select level page</li>
+            <li>
+              load game button: redirects to the saved games of the current
+              player
+            </li>
+          </ul>
+
+          <p>Login Page</p>
+
+          <ul>
+            <li>
+              menu: pulls out a menu containing the register, home, help and
+              about pages.
+            </li>
+            <li>username input: accepts the username of the player</li>
+            <li>password input: accepts the password of the player</li>
+            <li>register: redirects to the register page</li>
+            <li>home: redirects to the home page</li>
+            <li>help: redirects to the help page</li>
+            <li>
+              login: finalizes the login action, logging the user in if the
+              credentials are correct, and then redirects them to the home page
+            </li>
+            <li>don't have an account?: redirects to the register page</li>
+          </ul>
+
+          <p>Register Page</p>
+          <ul>
+            <li>
+              menu: pulls out a menu containing the login, home, help and about
+              pages.
+            </li>
+            <li>login: redirects to the login page</li>
+            <li>home: redirects to the home page</li>
+            <li>help: redirects to the help page</li>
+            <li>first name input: accepts the first name of the player</li>
+            <li>last name input: accepts the last name of the player</li>
+            <li>email input: accepts the email of the player</li>
+            <li>username input: accepts the username of the player</li>
+            <li>password input: accepts the password of the player</li>
+            <li>
+              register button: finalizes the register action, registering the
+              user in if the credentials are correct, and then redirects them to
+              the home page
+            </li>
+            <li>
+              Do you already have an account?: redirects to the login page
+            </li>
+          </ul>
+
+          <p>About Page</p>
+          <ul>
+            <li>
+              menu: pulls out a menu containing the logout, help and home pages.
+            </li>
+            <li>logout: redirects to the login page</li>
+            <li>help: redirects to the help page</li>
+            <li>home: redirects to the home page</li>
+            <li>rules: describes the rules of the game</li>
+            <li>authors: enumerates the authors and details about them</li>
+          </ul>
+
+          <p>Help Page</p>
+          <ul>
+            <li>
+              menu: pulls out a menu containing the logout, home and about
+              pages.
+            </li>
+            <li>logout: redirects to the login page</li>
+            <li>home: redirects to the home page</li>
+            <li>about: redirects to the about page</li>
+            <li>
+              email input: accepts the email of the user that is connected
+            </li>
+            <li>
+              subject input: accepts text describing the issue regarding the app
+            </li>
+            <li>
+              message input: accepts text for detailing the issue regarding the
+              app
+            </li>
+            <li>send button: sends an email to the authors of the app</li>
+          </ul>
+
+          <p>Select Level Page</p>
+          <ul>
+            <li>
+              menu: pulls out a menu containing the logout, home, about and help
+              pages.
+            </li>
+            <li>logout: redirects to the login page</li>
+            <li>home: redirects to the home page</li>
+            <li>about: redirects to the about page</li>
+            <li>help: redirects to the help page</li>
+            <li>level 1-12: redirects the player to the games page.</li>
+          </ul>
+
+          <p>Gameplay page</p>
+          <ul>
+            <li>
+              menu: pulls out a menu containing the logout, home, about and help
+              pages.
+            </li>
+            <li>logout: redirects to the login page</li>
+            <li>home: redirects to the home page</li>
+            <li>about: redirects to the about page</li>
+            <li>help: redirects to the help page</li>
+            <li>game table: the place where the game takes place</li>
+            <li>restart level: restarts the current game</li>
+            <li>quit level: redirects to select level page</li>
+          </ul>
+        </section>
+
+        <section>
+          <h4>2.3 Operating Environment</h4>
+
+          <p>
+            The developed product can be used on any device with a connection to
+            the Internet and a browser installed.
+          </p>
+        </section>
+
+        <section>
+          <h4>2.4 Design and Implementation Constraints</h4>
+
+          <p>
+            Fruits On The Web is developed in [...] and uses HTML, CSS and
+            JavaScript for its visualization engine.
+          </p>
+        </section>
+      </section>
+
+      <section>
+        <h3>3. External Interface Requirements</h3>
+
+        <section>
+          <h4>3.1 User Interfaces</h4>
+
+          <div>
+            <figure typeof="sa:image">
+              <figcaption>Home Page</figcaption>
+              <img
+                src="../screenshots/home_page.jpg"
+                alt="Home Page Screenshot"
+                width="1000"
+              />
+            </figure>
+
+            <figure typeof="sa:image">
+              <figcaption>Login Page</figcaption>
+              <img
+                src="../screenshots/login_page.jpg"
+                alt="Login Page Screenshot"
+                width="1000"
+              />
+            </figure>
+
+            <figure typeof="sa:image">
+              <figcaption>Register Page</figcaption>
+              <img
+                src="../screenshots/register_page.jpg"
+                alt="Register Page Screenshot"
+                width="1000"
+              />
+            </figure>
+
+            <figure typeof="sa:image">
+              <figcaption>Help Page</figcaption>
+              <img
+                src="../screenshots/help_page.jpg"
+                alt="Help Page Screenshot"
+                width="1000"
+              />
+            </figure>
+
+            <figure typeof="sa:image">
+              <figcaption>About Page</figcaption>
+              <img
+                src="../screenshots/about_page.jpg"
+                alt="About Page Screenshot"
+                width="1000"
+              />
+            </figure>
+
+            <figure typeof="sa:image">
+              <figcaption>Select Level Page</figcaption>
+              <img
+                src="../screenshots/select_level_page.jpg"
+                alt="Select Level Page Screenshot"
+                width="1000"
+              />
+            </figure>
+
+            <figure typeof="sa:image">
+              <figcaption>Game Page</figcaption>
+              <img
+                src="../screenshots/game_page.jpg"
+                alt="Game Page Screenshot"
+                width="1000"
+              />
+            </figure>
+          </div>
+        </section>
+
+        <section>
+          <h4>3.2 Software Interfaces</h4>
+
+          <p>
+            The minimum software requirements of Fruits On The Web are a working
+            browser and a connection to the Internet.
+          </p>
+        </section>
+
+        <section>
+          <h4>3.4 Communications Interfaces</h4>
+
+          <p>
+            Fruits On The Web requires an Internet connection. The communication
+            standard to be used is HTTP.
+          </p>
+        </section>
+      </section>
+
+      <section>
+        <h3>4. System Features</h3>
+
+        <section>
+          <h4>4.1 Home Page</h4>
+
+          <p>
+            Users can enter their username, start a new game and load a game and
+            navigate to all other pages from this page.
+          </p>
+        </section>
+
+        <section>
+          <h4>4.2 Login Page</h4>
+
+          <p>
+            Users of the app can login by entering their credentials and
+            therefore access other functionalities of the app or register if
+            they do not have an account and navigate to other pages from this
+            page.
+          </p>
+        </section>
+
+        <section>
+          <h4>4.3 Register Page</h4>
+
+          <p>
+            Guests can create an account and then use it to log into the
+            application and access all the features it provides and navigate to
+            other pages from this page.
+          </p>
+        </section>
+
+        <section>
+          <h4>4.4 Help Page</h4>
+
+          <p>
+            Users can send a message that reports issues with the app using
+            their email and navigate to other pages from this page.
+          </p>
+        </section>
+
+        <section>
+          <h4>4.5 About Page</h4>
+
+          <p>
+            Users can read the rules of the game and some data about the
+            authors.
+          </p>
+        </section>
+
+        <section>
+          <h4>4.6 Select Level Page</h4>
+
+          <p>
+            Users can select levels based on their difficulty and navigate to
+            other pages from this page.
+          </p>
+        </section>
+
+        <section>
+          <h4>4.7 Game Page</h4>
+
+          <p>
+            Users can play the game by matching 3 or more of the same fruit
+            vertically/horizontally/diagonally, restart the level, quit the
+            level and navigate to other pages from this page. The game is timed
+            and scored.
+          </p>
+        </section>
+      </section>
+
+      <section>
+        <h3>5. Use of CSS: Motivation</h3>
+        <p>
+          To make the app as receptible as possible to primary school children,
+          the CSS used includes:
+        </p>
+        <ul>
+          <li>
+            Background: The fruity background creates a fun and playful
+            atmosphere, and helps reinforce the theme of the game.
+          </li>
+
+          <li>
+            Images: The images with fruits creates a interactive and educational
+            environment for the intended users.
+          </li>
+
+          <li>
+            Colors: The right color scheme helps enhance the overall design,
+            create a fun and engaging experience, and make the game more
+            visually appealing.
+          </li>
+
+          <li>
+            Fonts: Using a playful and bold font like "Amatic SC" helps create a
+            playful approach for the game.
+          </li>
+
+          <li>
+            Layout: Aligning the sections into columns makes the page easier to
+            read and navigate.
+          </li>
+
+          <li>
+            Grid: The grid is used in the game which involves matching fruits 3
+            by 3.
+          </li>
+
+          <li>
+            Responsiveness: The app is made responsive so that the intended
+            users(primary school children) can play on different devices.
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h4>6. References</h4>
+
+        <ol>
+          <li
+            typeof="schema:WebPage"
+            role="doc-biblioentry"
+            resource="https://github.com/denis0911/TW2023_A6"
+            property="schema:citation"
+          >
+            <cite property="schema:name">
+              <a href="https://github.com/denis0911/TW2023_A6" target="_blank"
+                >FrOW Github page</a
+              >
+            </cite>
+          </li>
+
+          <li
+            typeof="schema:WebPage"
+            role="doc-biblioentry"
+            resource="https://www.123rf.com/photo_17719753_a-set-of-cute-and-colorful-cartoon-fruit-icons.html"
+            property="schema:citation"
+          >
+            <cite property="schema:name">
+              <a
+                href="https://www.123rf.com/photo_17719753_a-set-of-cute-and-colorful-cartoon-fruit-icons.html"
+                target="_blank"
+              >
+                Icons for the fruits(1)
+              </a>
+            </cite>
+          </li>
+
+          <li
+            typeof="schema:WebPage"
+            role="doc-biblioentry"
+            resource="https://www.shutterstock.com/ro/search/animated-fruit"
+            property="schema:citation"
+          >
+            <cite property="schema:name">
+              <a
+                href="https://www.shutterstock.com/ro/search/animated-fruit"
+                target="_blank"
+              >
+                Icons for the fruits(2)</a
+              >
+            </cite>
+          </li>
+
+          <li
+            typeof="schema:WebPage"
+            role="doc-biblioentry"
+            resource="https://www.w3schools.com/css/default.asp"
+            property="schema:citation"
+          >
+            <cite property="schema:name">
+              <a
+                href="https://www.w3schools.com/css/default.asp"
+                target="_blank"
+                >CSS Sources(1)</a
+              >
+            </cite>
+          </li>
+
+          <li
+            typeof="schema:WebPage"
+            role="doc-biblioentry"
+            resource="https://developer.mozilla.org/en-US/docs/Web/CSS"
+            property="schema:citation"
+          >
+            <cite property="schema:name">
+              <a
+                href="https://developer.mozilla.org/en-US/docs/Web/CSS"
+                target="_blank"
+                >CSS Sources (2)</a
+              >
+            </cite>
+          </li>
+          <li
+            typeof="schema:WebPage"
+            role="doc-biblioentry"
+            resource="https://victorvlad19.github.io/web/"
+            property="schema:citation"
+          >
+            <cite property="schema:name">
+              <a href="https://victorvlad19.github.io/web/" target="_blank"
+                >CSS Sources (3)</a
+              >
+            </cite>
+          </li>
+          <li
+            typeof="schema:WebPage"
+            role="doc-biblioentry"
+            resource="https://css-tricks.com/almanac/properties/a/animation/"
+            property="schema:citation"
+          >
+            <cite property="schema:name">
+              <a
+                href="https://css-tricks.com/almanac/properties/a/animation/"
+                target="_blank"
+                >CSS Sources (4)</a
+              >
+            </cite>
+          </li>
+        </ol>
+      </section>
+    </article>
+  </body>
+</html>

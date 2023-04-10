@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/help_page.css" />
+    <link rel="stylesheet" type="text/css" href="css/common.css" />
+    <link rel="stylesheet" type="text/css" href="css/responsive.css" />
+    <link rel="icon" type="image/x-icon" href="css/logo/Logo.png" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Amatic+SC&display=swap"
+      rel="stylesheet"
+    />
+    <title>Help</title>
+  </head>
+  <body>
+    <!-- textbox for email -->
+    <div class="help">
+      <form method="post" action="send_email.php">
+        <h1>Send us an email !</h1>
+        <input
+          type="text"
+          id="email"
+          name="email"
+          placeholder="Email"
+          required
+        /><br />
+        <input
+          type="text"
+          id="subject"
+          name="subject"
+          placeholder="Subject"
+          required
+        /><br />
+        <textarea
+          rows="10"
+          cols="50"
+          id="message"
+          name="message"
+          placeholder="Message"
+          required
+        ></textarea
+        ><br />
+        <input
+          type="hidden"
+          id="to"
+          name="to"
+          value="dascaluraresm@gmail.com"
+        />
+        <input type="submit" value="Send" />
+      </form>
+    </div>
+
+    <!-- top bar -->
+    <input class="menu-icon" type="checkbox" id="menu-icon" name="menu-icon" />
+    <label for="menu-icon"></label>
+    <nav class="nav">
+      <ul class="MenuButtons">
+        <li><a href="login.html">Logout</a></li>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+  </body>
+</html>

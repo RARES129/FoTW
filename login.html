@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/login_page.css" />
+    <link rel="stylesheet" type="text/css" href="css/common.css" />
+    <link rel="stylesheet" type="text/css" href="css/responsive.css" />
+    <link rel="icon" type="image/x-icon" href="css/logo/Logo.png" />
+    <title>Login</title>
+  </head>
+  <body>
+    <div class="login">
+      <form>
+        <label for="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="Your Username"
+        />
+
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Your Password"
+        />
+        <br />
+        <img
+          src="css/login_images/porto.png"
+          width="45"
+          height="65"
+          class="portocala"
+          alt="Portocala"
+        />
+        <img
+          src="css/login_images/lemon.png"
+          width="55"
+          height="65"
+          class="lamaie"
+          alt="Lamaie"
+        />
+        <button type="submit" formaction="home.html">Login</button>
+        <br />
+        <button formaction="register.html">Don't have an account?</button>
+      </form>
+    </div>
+
+    <!-- top bar -->
+    <input class="menu-icon" type="checkbox" id="menu-icon" name="menu-icon" />
+    <label for="menu-icon"></label>
+    <nav class="nav">
+      <ul class="MenuButtons">
+        <li><a href="register.html">Register</a></li>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="help.html">Help</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+  </body>
+</html>
