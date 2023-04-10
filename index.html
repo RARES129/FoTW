@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/home_page.css" />
+    <link rel="stylesheet" type="text/css" href="css/common.css" />
+    <link rel="stylesheet" type="text/css" href="css/responsive.css" />
+    <link rel="icon" type="image/x-icon" href="css/logo/Logo.png" />
+    <title>Home</title>
+  </head>
+  <body>
+    <!-- center of page -->
+    <div class="home">
+      <img src="css/logo/LogoNegru.png" alt="LogoNegru" /> <br />
+      <input type="text" id="username" name="username" placeholder="Username" />
+      <br />
+    </div>
+
+    <!-- butoane -->
+    <div class="home_buttons">
+      <button onclick="window.location.href='select level.html';">
+        Start New Game
+      </button>
+      <br />
+      <button onclick="window.location.href='gamepage.html';">Load Game</button>
+    </div>
+
+    <!-- top bar -->
+    <input class="menu-icon" type="checkbox" id="menu-icon" name="menu-icon" />
+    <label for="menu-icon"></label>
+    <nav class="nav">
+      <ul class="MenuButtons">
+        <li><a href="login.html">Logout</a></li>
+        <li><a href="help.html">Help</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+  </body>
+</html>
