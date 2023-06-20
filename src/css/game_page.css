@@ -60,7 +60,7 @@
   margin-top: 3%;
   text-shadow: 0 0 3px white, 0 0 5px lightgreen;
 }
-
+/* 
 .game_buttons button {
   font-family: "Amatic SC", bold;
   cursor: pointer;
@@ -84,7 +84,7 @@
   transition: background 0.3s ease-in-out;
   align-self: start;
   font-size: xx-large;
-}
+} */
 
 .game_buttons button:hover {
   background-position: 150px;
