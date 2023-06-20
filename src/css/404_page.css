@@ -1,0 +1,14 @@
+.not_found h1 {
+  font-family: "Amatic SC", bold;
+  font-size: 600%;
+  font-style: normal;
+  font-variant: normal;
+  line-height: 100%;
+  color: #006600;
+  margin: 10px 10px;
+  padding-top: 3%;
+  text-align: center;
+  animation-duration: 1s;
+  animation-name: animate-pop;
+  animation-timing-function: cubic-bezier(0.26, 0.53, 0.74, 1.48);
+}

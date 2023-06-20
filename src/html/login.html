@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="../css/login_page.css" />
+    <link rel="stylesheet" type="text/css" href="../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../css/responsive.css" />
+    <link rel="icon" type="image/x-icon" href="../css/img/Logo.png" />
+    <title>Login</title>
+  </head>
+  <body>
+    <div class="login">
+      <form action="/" method="post" autocomplete="off">
+        <label id="usernameText" for="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="Your Username"
+          required
+        />
+
+        <label id="passwordText" for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Your Password"
+          required
+        />
+        <br />
+        <img
+          src="../css/img/porto.png"
+          width="45"
+          height="65"
+          class="portocala"
+          alt="Portocala"
+        />
+        <img
+          src="../css/img/lemon.png"
+          width="55"
+          height="65"
+          class="lamaie"
+          alt="Lamaie"
+        />
+        <button type="submit" id="login-button">Login</button>
+        <br />
+        <button type="button" id="register-button">
+          Don't have an account?
+        </button>
+      </form>
+    </div>
+
+    <script>
+      var registerButton = document.getElementById("register-button");
+      registerButton.addEventListener("click", function () {
+        window.location.href = "/register";
+      });
+      if (
+        window.location.pathname !== "/" &&
+        document.cookie.includes("loggedIn=true")
+      ) {
+        window.location.href = "/home";
+      }
+    </script>
+    <script src="../public/ChangeLanguage.js"></script>
+  </body>
+</html>

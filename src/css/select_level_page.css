@@ -1,0 +1,107 @@
+.select_level_titlu h1 {
+  font-family: "Amatic SC", bold;
+  font-weight: 700;
+  font-style: normal;
+  font-variant: normal;
+  line-height: 100%;
+  color: #006600;
+  margin: 30px 30px;
+  padding-top: 20px;
+  text-align: center;
+  margin-bottom: 0.5%;
+  animation-duration: 1s;
+  animation-name: animate-pop;
+  animation-timing-function: cubic-bezier(0.26, 0.53, 0.74, 1.48);
+}
+.select_level {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 20px 20px;
+}
+.select_level .level {
+  background-color: #fff;
+  border: 2px solid #006600;
+  border-radius: 10px;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+  justify-content: center;
+  margin: 20px;
+  text-align: center;
+  width: 200px;
+  transition: all 0.2s ease-in-out;
+  animation-name: animate-glow;
+  animation-timing-function: ease;
+  animation-duration: 0.75s;
+  animation-fill-mode: backwards;
+}
+.select_level .level:hover {
+  transform: scale(1.05);
+}
+.select_level .level h2 {
+  color: #006600;
+  font-size: 24px;
+  margin: 0;
+  text-transform: uppercase;
+}
+.select_level .level p {
+  color: #666;
+  font-size: 18px;
+  margin: 10px 0 0;
+}
+.select_level .level a {
+  background-color: #006600;
+  border-radius: 5px;
+  color: #fff;
+  display: inline-block;
+  font-size: 18px;
+  margin: 10px 0 0;
+  padding: 10px 20px;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+.select_level .level a:hover {
+  background-color: #003300;
+}
+
+/* delay pentru animatie */
+.lvl1 {
+  animation-delay: 0.6s;
+}
+.lvl2 {
+  animation-delay: 0.7s;
+}
+.lvl3 {
+  animation-delay: 0.8s;
+}
+.lvl4 {
+  animation-delay: 0.9s;
+}
+.lvl5 {
+  animation-delay: 1s;
+}
+.lvl6 {
+  animation-delay: 1.1s;
+}
+.lvl7 {
+  animation-delay: 1.2s;
+}
+.lvl8 {
+  animation-delay: 1.3s;
+}
+.lvl9 {
+  animation-delay: 1.4s;
+}
+.lvl10 {
+  animation-delay: 1.5s;
+}
+.lvl11 {
+  animation-delay: 1.6s;
+}
+.lvl12 {
+  animation-delay: 1.7s;
+}

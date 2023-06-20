@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <link rel="stylesheet" type="text/css" href="../css/register_page.css" />
+    <link rel="stylesheet" type="text/css" href="../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../css/responsive.css" />
+    <link rel="icon" type="image/x-icon" href="../css/img/Logo.png" />
+  </head>
+  <body>
+    <div class="register">
+      <div class="form"></div>
+      <form
+        class="register-form"
+        action="/register"
+        method="POST"
+        autocomplete="off"
+      >
+        <label id="firstNameText" for="firstName">First Name:</label>
+        <input
+          type="text"
+          id="firstName"
+          name="firstName"
+          placeholder="Your First Name"
+          required
+        />
+        <label id="lastNameText" for="lastName">Last Name:</label>
+        <input
+          type="text"
+          id="lastName"
+          name="lastName"
+          placeholder="Your Last Name"
+          required
+        />
+
+        <label for="email">Email:</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Your Email"
+          required
+        />
+
+        <label id="usernameText" for="username">Username:</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="Your Username"
+          maxlength="10"
+          required
+        />
+
+        <label id="passwordText" for="password">Password:</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Your Password"
+          minlength="5"
+          required
+        />
+
+        <button type="submit" id="register-button">Register</button>
+        <br />
+        <button type="button" id="login-button">
+          Do you already have an account?
+        </button>
+        <img
+          src="../css/img/mar.png"
+          width="60"
+          height="60"
+          class="mar"
+          alt="Mar"
+        />
+        <img
+          src="../css/img/para.png"
+          width="45"
+          height="70"
+          class="para"
+          alt="Para"
+        />
+      </form>
+    </div>
+
+    <script>
+      var loginButton = document.getElementById("login-button");
+      loginButton.addEventListener("click", function () {
+        window.location.href = "/";
+      });
+    </script>
+    <script src="../public/ChangeLanguage.js"></script>
+  </body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="../css/home_page.css" />
+    <link rel="stylesheet" type="text/css" href="../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../css/responsive.css" />
+    <link rel="icon" type="image/x-icon" href="../css/img/Logo.png" />
+    <title>Home</title>
+  </head>
+  <body>
+    <!-- center of page -->
+    <div class="home">
+      <img src="../css/img/LogoNegru.png" alt="LogoNegru" /> <br />
+    </div>
+
+    <!-- butoane -->
+    <div class="home_buttons">
+      <button id="startGame" onclick="window.location.href='/game';">
+        Start New Game
+      </button>
+      <br />
+      <button id="loadGame" onclick="window.location.href='/select_lvl';">
+        Load Game
+      </button>
+      <br />
+      <button id="leaderboard" onclick="window.location.href='/leaderboard';">
+        Leaderboard
+      </button>
+      <br />
+      <button id="changeLanguage" onclick="changeLanguage()">
+        Schimba limba
+      </button>
+    </div>
+
+    <!-- top bar -->
+    <input class="menu-icon" type="checkbox" id="menu-icon" name="menu-icon" />
+    <label for="menu-icon"></label>
+    <nav class="nav">
+      <ul class="MenuButtons">
+        <li><a id="help" href="/help">Help</a></li>
+        <li><a id="about" href="/about">About</a></li>
+        <li><a id="logout" href="/logout">Logout</a></li>
+      </ul>
+    </nav>
+    <script src="../public/ChangeLanguage.js"></script>
+  </body>
+</html>

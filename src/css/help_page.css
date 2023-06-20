@@ -1,0 +1,70 @@
+.help {
+  margin: 5% auto;
+  max-width: 45%;
+  padding: 1%;
+  background: transparent;
+  backdrop-filter: blur(20px);
+  border-radius: 45px;
+  border: 2px solid green;
+  font-family: Arial, sans-serif;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  display: flex;
+  margin-bottom: 2%;
+  animation-duration: 1s;
+  animation-name: animate-pop;
+  animation-timing-function: cubic-bezier(0.26, 0.53, 0.74, 1.48);
+}
+
+.help h1 {
+  font-family: "Amatic SC";
+  font-weight: bold;
+  text-shadow: 0 0 3px white, 0 0 5px lightgreen;
+  font-size: 500%;
+  color: green;
+  display: block;
+  margin-top: 4%;
+  margin-bottom: 1%;
+}
+.help input[type="text"],
+.help input[type="email"],
+.help textarea {
+  width: 100%;
+  padding: 2% 4%;
+  font-size: 16px;
+  border: 1px solid green;
+  border-radius: 25px;
+  box-sizing: border-box;
+  margin-bottom: 2%;
+  resize: none;
+}
+
+.help input[type="submit"] {
+  font-family: "Amatic SC", bold;
+  cursor: pointer;
+  margin-top: 1%;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 600;
+  outline: none;
+  border: none;
+  border-radius: 40px;
+  border: 2px solid rgb(0, 94, 0);
+  color: white;
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgb(0, 175, 0),
+    rgb(0, 115, 0) 10%,
+    rgb(205, 135, 0) 10%,
+    rgb(255, 175, 20) 20%
+  );
+  background-size: 100%;
+  transition: background 0.3s ease-in-out;
+}
+.help input[type="submit"]:hover {
+  background-position: 150px;
+}
+.help input[type="submit"]:active {
+  box-shadow: 0 0 50px lightgreen, 0 0 50px lightgreen;
+}

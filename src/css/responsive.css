@@ -1,0 +1,276 @@
+/* 
+  ##Device = Desktops
+  ##Screen = 1281px to higher resolution desktops
+*/
+@media screen and (min-width: 1281px) {
+  .menu-icon:checked + label,
+  .menu-icon:not(:checked) + label {
+    right: 55px;
+  }
+  .home input {
+    font-size: 200%;
+  }
+  .login {
+    width: 30%;
+  }
+  .register {
+    width: 30%;
+  }
+  .about {
+    width: 50%;
+  }
+  .nav {
+    right: 30px;
+  }
+  .nav ul li a {
+    font-size: 10vh;
+  }
+  .home_buttons button {
+    font-size: 200%;
+    padding: 10px 75px;
+  }
+  .register button {
+    font-size: 150%;
+    padding: 5px 15px;
+  }
+  .login button {
+    font-size: 150%;
+    padding: 5px 15px;
+  }
+  .help input[type="submit"] {
+    font-size: 150%;
+    padding: 5px 35px;
+  }
+  .select_level_titlu h1 {
+    font-size: 400%;
+  }
+  .about_titlu h1 {
+    font-size: 350%;
+  }
+}
+/* 
+  ##Device = Laptops, Desktops
+  ##Screen = B/w 1025px to 1280px
+*/
+@media screen and (min-width: 1025px) and (max-width: 1280px) {
+  .home input {
+    font-size: 180%;
+  }
+  .login {
+    width: 35%;
+  }
+  .register {
+    width: 35%;
+  }
+  .about {
+    width: 55%;
+  }
+
+  .nav ul li a {
+    font-size: 9vh;
+  }
+  .home_buttons button {
+    font-size: 180%;
+    padding: 9px 70px;
+  }
+  .register button {
+    font-size: 145%;
+    padding: 5px 15px;
+  }
+  .login button {
+    font-size: 145%;
+    padding: 5px 15px;
+  }
+  .help input[type="submit"] {
+    font-size: 145%;
+    padding: 5px 35px;
+  }
+  .select_level_titlu h1 {
+    font-size: 300%;
+  }
+
+  .about_titlu h1 {
+    font-size: 300%;
+  }
+}
+
+/* 
+  ##Device = Tablets, Ipads (landscape)
+  ##Screen = B/w 768px to 1024px
+*/
+@media screen and (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  .home input {
+    font-size: 160%;
+  }
+  .login {
+    width: 40%;
+  }
+  .register {
+    width: 40%;
+  }
+  .about {
+    width: 60%;
+  }
+
+  .nav ul li a {
+    font-size: 8vh;
+  }
+  .home_buttons button {
+    font-size: 160%;
+    padding: 8px 65px;
+  }
+  .register button {
+    font-size: 140%;
+    padding: 5px 15px;
+  }
+  .login button {
+    font-size: 140%;
+    padding: 5px 15px;
+  }
+  .help input[type="submit"] {
+    font-size: 140%;
+    padding: 5px 35px;
+  }
+  .select_level_titlu h1 {
+    font-size: 300%;
+  }
+
+  .about_titlu h1 {
+    font-size: 300%;
+  }
+}
+
+/* 
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+*/
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .home input {
+    font-size: 140%;
+  }
+  .login {
+    width: 43%;
+  }
+  .register {
+    width: 43%;
+  }
+  .about {
+    width: 63%;
+  }
+  .nav ul li a {
+    font-size: 7vh;
+  }
+  .home_buttons button {
+    font-size: 140%;
+    padding: 7px 60px;
+  }
+  .register button {
+    font-size: 135%;
+    padding: 5px 15px;
+  }
+  .login button {
+    font-size: 135%;
+    padding: 5px 15px;
+  }
+  .help input[type="submit"] {
+    font-size: 135%;
+    padding: 5px 35px;
+  }
+  .select_level_titlu h1 {
+    font-size: 275%;
+  }
+  .about_titlu h1 {
+    font-size: 275%;
+  }
+}
+
+/* 
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 481px to 767px
+*/
+@media screen and (min-width: 481px) and (max-width: 767px) {
+  .home input {
+    font-size: 120%;
+  }
+  .login {
+    width: 55%;
+  }
+  .register {
+    width: 55%;
+  }
+
+  .about {
+    width: 75%;
+  }
+  .nav ul li a {
+    font-size: 6vh;
+  }
+  .home_buttons button {
+    font-size: 120%;
+    padding: 6px 55px;
+  }
+  .register button {
+    font-size: 130%;
+    padding: 5px 15px;
+  }
+  .login button {
+    font-size: 130%;
+    padding: 5px 15px;
+  }
+  .help input[type="submit"] {
+    font-size: 130%;
+    padding: 5px 35px;
+  }
+  .select_level_titlu h1 {
+    font-size: 200%;
+  }
+
+  .about_titlu h1 {
+    font-size: 200%;
+  }
+}
+
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+@media screen and (max-width: 480px) {
+  .home input {
+    font-size: 100%;
+  }
+  .login {
+    width: 63%;
+  }
+  .register {
+    width: 63%;
+  }
+
+  .about {
+    width: 83%;
+  }
+  .nav ul li a {
+    font-size: 5vh;
+  }
+  .home_buttons button {
+    font-size: 100%;
+    padding: 5px 50px;
+  }
+  .register button {
+    font-size: 125%;
+    padding: 5px 15px;
+  }
+  .login button {
+    font-size: 125%;
+    padding: 5px 15px;
+  }
+  .help input[type="submit"] {
+    font-size: 125%;
+    padding: 5px 35px;
+  }
+  .select_level_titlu h1 {
+    font-size: 170%;
+  }
+  .about_titlu h1 {
+    font-size: 170%;
+  }
+}
