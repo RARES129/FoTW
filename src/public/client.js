@@ -51,8 +51,9 @@ function fetchFruits() {
   
         // Create fruit elements and append them to the game page
         for (const fruit of fruits) {
+          alert(fruit);
           const fruitElement = document.createElement('img');
-          fruitElement.src = `/css/img/${fruit}.png`;
+          fruitElement.src = `./css/img/${fruit}.png`;
           fruitElement.classList.add('fruit');
           fruitElement.draggable = true; // Enable drag and drop
           fruitElement.addEventListener('click', selectFruit);
