@@ -12,7 +12,7 @@ function handleRequest(req, res) {
   var fsPath;
   if (
     (requestUrl === "/home" ||
-      requestUrl === "/game" ||
+      requestUrl === "/gamepage" ||
       requestUrl === "/select_lvl" ||
       requestUrl === "/about" ||
       requestUrl === "/help") &&
@@ -39,7 +39,7 @@ function handleRequest(req, res) {
     fsPath = path.resolve(appRootPath + "/src/html/register.html");
   } else if (requestUrl === "/help") {
     fsPath = path.resolve(appRootPath + "/src/html/help.html");
-  } else if (requestUrl === "/game") {
+  } else if (requestUrl === "/gamepage") {
     fsPath = path.resolve(appRootPath + "/src/html/gamepage.html");
   } else if (requestUrl === "/select_lvl") {
     fsPath = path.resolve(appRootPath + "/src/html/select level.html");
