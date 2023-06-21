@@ -208,11 +208,13 @@ function serveStaticFile(req, res) {
       // Return the game state
       res.setHeader('Content-Type', 'application/json');
       res.end(JSON.stringify({ fruits: fruitElements }));
+      return;
     } else if (req.method === 'POST' && req.url === '/game/restart') {
       // Reset the game state
       createRandomizedFruitGrid();
       res.statusCode = 200;
       res.end();
+      return;
     } else if (req.method === 'POST' && req.url === '/game/move') {
       // Handle a move request
       let body = '';
