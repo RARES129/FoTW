@@ -12,7 +12,7 @@ function handleRequest(req, res) {
   var fsPath;
   if (
     (requestUrl === "/home" ||
-      requestUrl === "/game" ||
+      requestUrl === "/gamepage" ||
       requestUrl === "/select_lvl" ||
       requestUrl === "/about" ||
       requestUrl === "/help") &&
