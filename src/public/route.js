@@ -39,7 +39,7 @@ function handleRequest(req, res) {
     fsPath = path.resolve(appRootPath + "/src/html/register.html");
   } else if (requestUrl === "/help") {
     fsPath = path.resolve(appRootPath + "/src/html/help.html");
-  } else if (requestUrl === "/gamepage") {
+  } else if (requestUrl === "/game") {
     fsPath = path.resolve(appRootPath + "/src/html/gamepage.html");
   } else if (requestUrl === "/select_lvl") {
     fsPath = path.resolve(appRootPath + "/src/html/select level.html");
