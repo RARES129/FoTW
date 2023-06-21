@@ -231,8 +231,4 @@ function serveStaticFile(req, res) {
     }
   });
   
-  const port = 3000;
-  server.listen(port, () => {
-    createRandomizedFruitGrid();
-    console.log(`Server running on port ${port}`);
-  });
+  createRandomizedFruitGrid();
