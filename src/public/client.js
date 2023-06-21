@@ -43,7 +43,7 @@ function updateTimer(timeLeft) {
 // Fetch the fruits from the server and generate the fruit grid
 // Fetch the fruits from the server and generate the fruit grid
 function fetchFruits() {
-    fetch('http://localhost:3001/game')
+    fetch('http://0.0.0.0/game')
       .then(response => response.json())
       .then(data => {
         const { fruits } = data;
