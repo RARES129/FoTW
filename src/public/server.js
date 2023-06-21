@@ -192,7 +192,7 @@ function serveStaticFile(req, res) {
   
   const server = http.createServer((req, res) => {
     // Set CORS headers
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.setHeader('Access-Control-Allow-Origin', 'https://fruitsontheweb.onrender.com');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   
@@ -232,7 +232,7 @@ function serveStaticFile(req, res) {
   });
   
   const port = 3001;
-  server.listen(port, () => {
+  server.listen(port, '0.0.0.0', () => {
     createRandomizedFruitGrid();
     console.log(`Server running on port ${port}`);
   });
