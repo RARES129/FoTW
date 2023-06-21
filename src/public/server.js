@@ -232,7 +232,7 @@ function serveStaticFile(req, res) {
   });
   
   const port = 3001;
-  server.listen(port, 'fruitsontheweb.onrender.com', () => {
+  server.listen(port, '0.0.0.0', () => {
     createRandomizedFruitGrid();
     console.log(`Server running on port ${port}`);
   });

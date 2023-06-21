@@ -43,7 +43,7 @@ function updateTimer(timeLeft) {
 // Fetch the fruits from the server and generate the fruit grid
 // Fetch the fruits from the server and generate the fruit grid
 function fetchFruits() {
-    fetch('http://fruitsontheweb.onrender.com/game')
+    fetch('http://0.0.0.0/game')
       .then(response => response.json())
       .then(data => {
         const { fruits } = data;
@@ -167,7 +167,7 @@ function moveFruits(selectedElement, destinationElement) {
     const destinationFruitIndex = Array.from(gamePageElement.children).indexOf(tempDestination);
   
     // Send a move request to the server
-    fetch('http://fruitsontheweb.onrender.com/game/move', {
+    fetch('http://localhost:3001/game/move', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
