@@ -43,7 +43,7 @@ function updateTimer(timeLeft) {
 // Fetch the fruits from the server and generate the fruit grid
 // Fetch the fruits from the server and generate the fruit grid
 function fetchFruits() {
-    fetch('https://fruitsontheweb.onrender.com/game')
+    fetch('http://localhost:3001/game')
       .then(response => response.json())
       .then(data => {
         const { fruits } = data;
@@ -51,7 +51,6 @@ function fetchFruits() {
   
         // Create fruit elements and append them to the game page
         for (const fruit of fruits) {
-          console.log(fruit);
           const fruitElement = document.createElement('img');
           fruitElement.src = `./css/img/${fruit}.png`;
           fruitElement.classList.add('fruit');
@@ -167,7 +166,7 @@ function moveFruits(selectedElement, destinationElement) {
     const destinationFruitIndex = Array.from(gamePageElement.children).indexOf(tempDestination);
   
     // Send a move request to the server
-    fetch('https://fruitsontheweb.onrender.com/game/move', {
+    fetch('http://localhost:3001/game/move', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
