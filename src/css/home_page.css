@@ -12,14 +12,6 @@
   margin: 0 auto;
 }
 
-/* username home page */
-.home input {
-  border: 2px solid #111;
-  border-radius: 20px;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
-}
-/* ------- */
 
 /* butoane */
 .home_buttons button {
