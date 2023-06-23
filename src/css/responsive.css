@@ -7,6 +7,9 @@
   .menu-icon:not(:checked) + label {
     right: 55px;
   }
+  .home {
+    margin-top: 7%;
+  }
   .home input {
     font-size: 200%;
   }
@@ -53,6 +56,9 @@
   ##Screen = B/w 1025px to 1280px
 */
 @media screen and (min-width: 1025px) and (max-width: 1280px) {
+  .home {
+    margin-top: 12%;
+  }
   .home input {
     font-size: 180%;
   }
@@ -99,6 +105,9 @@
   ##Screen = B/w 768px to 1024px
 */
 @media screen and (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  .home {
+    margin-top: 20%;
+  }
   .home input {
     font-size: 160%;
   }
@@ -145,6 +154,9 @@
   ##Screen = B/w 768px to 1024px
 */
 @media screen and (min-width: 768px) and (max-width: 1024px) {
+  .home {
+    margin-top: 20%;
+  }
   .home input {
     font-size: 140%;
   }
@@ -189,6 +201,9 @@
   ##Screen = B/w 481px to 767px
 */
 @media screen and (min-width: 481px) and (max-width: 767px) {
+  .home {
+    margin-top: 30%;
+  }
   .home input {
     font-size: 120%;
   }
@@ -235,6 +250,9 @@
   ##Screen = B/w 320px to 479px
 */
 @media screen and (max-width: 480px) {
+  .home {
+    margin-top: 30%;
+  }
   .home input {
     font-size: 100%;
   }
