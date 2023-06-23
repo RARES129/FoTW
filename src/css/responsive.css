@@ -10,8 +10,11 @@
   .home {
     margin-top: 7%;
   }
-  .home input {
-    font-size: 200%;
+  .timer,.score {
+    font-size: 350%;
+  }
+  .logo img{
+    max-width: 35%;
   }
   .login {
     width: 30%;
@@ -59,8 +62,11 @@
   .home {
     margin-top: 12%;
   }
-  .home input {
-    font-size: 180%;
+  .timer,.score {
+    font-size: 350%;
+  }
+  .logo img{
+    max-width: 40%;
   }
   .login {
     width: 35%;
@@ -108,8 +114,11 @@
   .home {
     margin-top: 20%;
   }
-  .home input {
-    font-size: 160%;
+  .timer,.score {
+    font-size: 300%;
+  }
+  .logo img{
+    max-width: 55%;
   }
   .login {
     width: 40%;
@@ -157,8 +166,11 @@
   .home {
     margin-top: 20%;
   }
-  .home input {
-    font-size: 140%;
+  .timer,.score {
+    font-size: 300%;
+  }
+  .logo img{
+    max-width: 55%;
   }
   .login {
     width: 43%;
@@ -204,8 +216,11 @@
   .home {
     margin-top: 30%;
   }
-  .home input {
-    font-size: 120%;
+  .timer,.score {
+    font-size: 200%;
+  }
+  .logo img{
+    max-width: 60%;
   }
   .login {
     width: 55%;
@@ -253,8 +268,11 @@
   .home {
     margin-top: 30%;
   }
-  .home input {
-    font-size: 100%;
+  .timer,.score {
+    font-size: 200%;
+  }
+  .logo img{
+    max-width: 70%;
   }
   .login {
     width: 63%;

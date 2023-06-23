@@ -35,28 +35,27 @@
 
 .score {
   font-family: "Amatic SC", bold;
-  font-size: 40px;
   font-style: normal;
   font-variant: normal;
   font-weight: 700;
   line-height: 90%;
   color: #01d901;
-  text-align: center;
-  margin-right: 85%;
-  margin-top: 2%;
+  text-align: left;
+  margin-left: 5%;
+  margin-top: 0.5%;
+  margin-bottom: 3%;
   text-shadow: 0 0 3px white, 0 0 5px lightgreen;
 }
 
 .timer {
   font-family: "Amatic SC", bold;
-  font-size: 60px;
   font-style: normal;
   font-variant: normal;
   font-weight: 700;
   line-height: 90%;
   color: #01d901;
-  text-align: center;
-  margin-right: 77%;
+  text-align: left;
+  margin-left: 5%;
   margin-top: 3%;
   text-shadow: 0 0 3px white, 0 0 5px lightgreen;
 }
