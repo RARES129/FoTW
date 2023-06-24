@@ -74,7 +74,7 @@ generateRSS()
   });
 
 function createHTMLFile(userScore) {
-  const filePath = ('../src/html/leaderboard.html');
+  const filePath = ('./src/html/leaderboard.html');
   
   fs.readFile(filePath, 'utf-8', (error, fileContent) => {
     if (error) {
