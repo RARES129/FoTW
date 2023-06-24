@@ -53,6 +53,13 @@
   .about_titlu h1 {
     font-size: 350%;
   }
+  .game_page{
+    width: 50%;
+    height: 30%;
+    margin-top: -3%;
+    border-radius: 45px;
+    border: 5px solid green;
+  }
 }
 /* 
   ##Device = Laptops, Desktops
@@ -103,6 +110,13 @@
 
   .about_titlu h1 {
     font-size: 300%;
+  }
+  .game_page{
+    width: 60%;
+    height: 40%;
+    margin-top: 0%;
+    border: 5px solid green;
+    border-radius: 45px;
   }
 }
 
@@ -156,6 +170,13 @@
   .about_titlu h1 {
     font-size: 300%;
   }
+  .game_page{
+    width: 70%;
+    height: 50%;
+    margin-top: 5%;
+    border: 3px solid green;
+    border-radius: 35px;
+  }
 }
 
 /* 
@@ -205,6 +226,13 @@
   }
   .about_titlu h1 {
     font-size: 275%;
+  }
+  .game_page{
+    width: 70%;
+    height: 50%;
+    margin-top: 5%;
+    border: 3px solid green;
+    border-radius: 35px;
   }
 }
 
@@ -258,6 +286,14 @@
   .about_titlu h1 {
     font-size: 200%;
   }
+  .game_page{
+    width: 70%;
+    height: 50%;
+    margin-top: 15%;
+    border: 2px solid green;
+    border-radius: 25px;
+  }
+
 }
 
 /* 
@@ -309,4 +345,12 @@
   .about_titlu h1 {
     font-size: 170%;
   }
+  .game_page{
+    width: 90%;
+    height: 80%;
+    margin-top: 40%;
+    border: 1px solid green;
+    border-radius: 15px;
+  }
+
 }

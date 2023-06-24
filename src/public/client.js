@@ -7,7 +7,6 @@ const movesElement = document.querySelector('.moves');
 
 // Global variables
 let selectedFruitElement = null; // Tracks the currently selected fruit element
-let remainingMoves = 25; // Maximum number of moves allowed for the level
 
 // Add the selected class to the clicked fruit element
 function selectFruit(event) {
@@ -16,43 +15,25 @@ function selectFruit(event) {
     selectedFruitElement = fruitElement;
   }
   
-  // Update the score and remaining moves
-  function updateScore(points) {
-    const currentScore = parseInt(scoreElement.textContent.replace('Score: ', ''), 10);
-    const newScore = isNaN(currentScore) ? points : currentScore + points;
-    scoreElement.textContent = `Score: ${newScore}`;
-  
-    if (newScore >= 1000) {
-      displayLevelCompleteMessage();
-    }
-  
-    remainingMoves--;
-    movesElement.textContent = `Moves left: ${remainingMoves}`;
-  
-    if (remainingMoves === 0) {
-      restartLevel();
-    }
+
+  function updateScore(score) {
+    const scoreElement = document.querySelector('.score');
+    scoreElement.textContent = `Score: ${score}`;
   }
-
-function updateTimer(timeLeft) {
-  const minutes = Math.floor(timeLeft / 60).toString().padStart(2, '0');
-  const seconds = (timeLeft % 60).toString().padStart(2, '0');
-  timerElement.textContent = `Time left: ${minutes}:${seconds}`;
-}
-
-// Fetch the fruits from the server and generate the fruit grid
+  
 // Fetch the fruits from the server and generate the fruit grid
 function fetchFruits() {
     fetch('https://fruitsonthewebserver.onrender.com/game')
       .then(response => response.json())
       .then(data => {
-        const { fruits } = data;
+        const { fruits, score } = data;
+        updateScore(score);
         gamePageElement.innerHTML = ''; // Clear the game page
   
         // Create fruit elements and append them to the game page
         for (const fruit of fruits) {
           const fruitElement = document.createElement('img');
-          fruitElement.src = `./css/img/${fruit}.png`;
+          fruitElement.src = `/css/img/${fruit}.png`;
           fruitElement.classList.add('fruit');
           fruitElement.draggable = true; // Enable drag and drop
           fruitElement.addEventListener('click', selectFruit);
@@ -77,36 +58,68 @@ function fetchFruits() {
       });
   }
   
-  
-
-// Call the fetchFruits function to fetch and generate the fruit grid
 fetchFruits();
 
-// Restart level button click handler
-function restartLevel() {
-    remainingMoves = 25; // Reset remaining moves to the maximum number
-    fetch('/game/restart', { method: 'POST' })
-      .then(response => {
+window.addEventListener('load', () => {
+  fetch('https://fruitsonthewebserver.onrender.com/game', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => {
+      if (response.ok) {
+        // Restart successful, fetch new fruits and refresh the page
+        fetchFruits();
+        updateScore(0);
+      } else {
+        throw new Error('Restart failed');
+      }
+    })
+    .catch((error) => {
+      console.error('Failed to restart the level:', error);
+    });
+});
+
+// Function to restart the level or game based on the provided parameters
+function restart(level) {
+  const restartUrl = 'https://fruitsonthewebserver.onrender.com/game';
+
+  // Common logic to restart the level or game
+  const restartLogic = () => {
+    fetch(restartUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ level }),
+    })
+      .then((response) => {
         if (response.ok) {
-          // Restart successful, fetch new fruits and refresh the page
+          location.reload();
+          updateScore(0);
           fetchFruits();
-          window.location.reload();
+
+
         } else {
           throw new Error('Restart failed');
         }
       })
-      .catch(error => {
-        console.error('Failed to restart the level:', error);
+      .catch((error) => {
+        console.error('Failed to restart:', error);
       });
-  }
-// Quit level button click handler
-function quitLevel() {
-  // Redirect to the select level page
-  window.location.href = '/home';
+  };
+
+restartLogic();
 }
 
-// Drag and Drop event handlers
 
+
+// Quit level button click handler
+function quitLevel() {
+// Redirect to the select level page
+window.location.href = '/home';
+}
 function dragStart(event) {
   // Store the dragged fruit element
   selectedFruitElement = event.target;
@@ -142,54 +155,46 @@ function swapFruits(selectedElement, destinationElement) {
   destinationElement.parentNode.replaceChild(tempSelected, destinationElement);
 }
 
-  
-  // Display "Congrats! Level Complete" message
-  function displayLevelCompleteMessage() {
-    const messageElement = document.createElement('div');
-    messageElement.textContent = 'Congrats! Level Complete';
-    messageElement.classList.add('level-complete-message');
-    gamePageElement.appendChild(messageElement);
-  }
 
 // Move the selected fruit to the destination fruit element
 function moveFruits(selectedElement, destinationElement) {
-    // Clone the selected and destination fruits
-    const tempSelected = selectedElement.cloneNode();
-    const tempDestination = destinationElement.cloneNode();
-  
-    // Replace the selected fruit with the destination fruit locally
-    selectedElement.parentNode.replaceChild(tempDestination, selectedElement);
-    destinationElement.parentNode.replaceChild(tempSelected, destinationElement);
-  
-    // Find the indices of the selected and destination fruits
-    const selectedFruitIndex = Array.from(gamePageElement.children).indexOf(tempSelected);
-    const destinationFruitIndex = Array.from(gamePageElement.children).indexOf(tempDestination);
-  
-    // Send a move request to the server
-    fetch('https://fruitsonthewebserver.onrender.com/game/move', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        selectedIndex: selectedFruitIndex,
-        destinationIndex: destinationFruitIndex
-      })
+  // Find the indices of the selected and destination fruits
+  const selectedFruitIndex = Array.from(gamePageElement.children).indexOf(selectedElement);
+  const destinationFruitIndex = Array.from(gamePageElement.children).indexOf(destinationElement);
+
+  // Clone the selected and destination fruits
+  const tempSelected = selectedElement.cloneNode();
+  const tempDestination = destinationElement.cloneNode();
+
+  // Replace the selected fruit with the destination fruit locally
+  selectedElement.parentNode.replaceChild(tempDestination, selectedElement);
+  destinationElement.parentNode.replaceChild(tempSelected, destinationElement);
+
+  // Send a move request to the server
+  fetch('https://fruitsonthewebserver.onrender.com/game/move', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      selectedIndex: selectedFruitIndex,
+      destinationIndex: destinationFruitIndex,
+    }),
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error('Move request failed');
+      }
     })
-    .then(response => {
-        if (response.status === 200) {
-          console.log('Move request successful');
-          updateScore(50); // Add 50 points to the score
-          return response.json();
-        } else {
-          throw new Error('Move request failed');
-        }
-      })
-      .then(data => {
-        const { fruits } = data;
+    .then((data) => {
+      const { fruits, score } = data;
+
+      if (fruits) {
         // Update the fruit grid based on the response from the server
         gamePageElement.innerHTML = '';
-  
+
         for (const fruit of fruits) {
           const fruitElement = document.createElement('img');
           fruitElement.src = `/css/img/${fruit}.png`;
@@ -205,18 +210,29 @@ function moveFruits(selectedElement, destinationElement) {
           fruitElement.style.maxHeight = '85%';
           fruitElement.style.verticalAlign = 'middle';
           gamePageElement.appendChild(fruitElement);
-
-          
-          const selectedFruitName = fruits[selectedFruitIndex];
-          const destinationFruitName = fruits[destinationFruitIndex];
-          console.log(`Replaced ${selectedFruitName} with ${destinationFruitName}`);
         }
-      })
-      .catch(error => {
-        console.error('Failed to move fruits:', error);
-        // Restore the swapped fruits in case of an error
-        selectedElement.parentNode.replaceChild(selectedElement, tempDestination);
-        destinationElement.parentNode.replaceChild(destinationElement, tempSelected);
-      });
-  }
-  
+
+        const selectedFruitName = fruits[selectedFruitIndex];
+        const destinationFruitName = fruits[destinationFruitIndex];
+        console.log(`Replaced ${selectedFruitName} with ${destinationFruitName}`);
+
+        if (score > 0) {
+          updateScore(score); // Add the updated score to the UI
+        }
+      } else {
+        throw new Error('Invalid move: The move does not result in a match.');
+      }
+    })
+    .catch((error) => {
+      console.error('Failed to move fruits:', error);
+      // Restore the swapped fruits in case of an error
+      tempSelected.parentNode.replaceChild(selectedElement, tempSelected);
+      tempDestination.parentNode.replaceChild(destinationElement, tempDestination);
+    });
+}
+
+
+
+
+
+

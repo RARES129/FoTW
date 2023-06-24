@@ -1,0 +1,106 @@
+.admin {
+    /*display: grid;*/
+    grid-template-columns: repeat(8, 1fr);
+    grid-gap: 0%;
+    width: 44%;
+    height: 35%;
+    margin: auto;
+    padding: 0.5%;
+    background: transparent;
+    backdrop-filter: blur(20px);
+    border-radius: 45px;
+    border: 5px solid green;
+    box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.3), 0 0 0 2px green,
+      0.3em 0.3em 1em black;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+    margin-top: 3%;
+    margin-left: 3%;
+    }
+
+.info {
+    position: relative;
+    display: inline-block;
+    width: 75%;
+    line-height: 45px;
+    transition: transform 0.2s ease-in-out;
+    }
+
+.row {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 40px;
+    border-bottom: 1px solid #AFAFAF;
+    border-radius: 45px;
+    border-width: 0px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.button {
+    font-family: "Amatic SC", bold;
+  cursor: pointer;
+  margin-top: 10px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 600;
+  outline: none;
+  border: none;
+  border-radius: 40px;
+  border: 2px solid rgb(0, 94, 0);
+  color: white;
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgb(0, 175, 0),
+    rgb(0, 115, 0) 10%,
+    rgb(205, 135, 0) 10%,
+    rgb(255, 175, 20) 20%
+  );
+  background-size: 100%;
+  transition: background 0.3s ease-in-out;
+  align-self: start;
+  font-size: xx-large;
+}
+
+.button button:hover {
+    background-position: 150px;
+  }
+  
+.button button:active {
+    box-shadow: 0 0 50px lightgreen, 0 0 50px lightgreen;
+  }
+
+
+  .popup {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .popup-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px;
+  }
+  
+  .popup h2 {
+    margin-top: 0;
+  }
+  
+  .popup input {
+    margin-bottom: 10px;
+  }
+  
+  .popup button {
+    margin-right: 10px;
+  }

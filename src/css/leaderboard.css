@@ -1,0 +1,73 @@
+
+.leaderboard {
+    /*display: grid;*/
+    grid-template-columns: repeat(8, 1fr);
+    grid-gap: 0%;
+    width: 44%;
+    height: 35%;
+    margin: auto;
+    padding: 0.5%;
+    background: transparent;
+    backdrop-filter: blur(20px);
+    border-radius: 45px;
+    border: 5px solid green;
+    box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.3), 0 0 0 2px green,
+      0.3em 0.3em 1em black;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+    margin-top: 3%;
+    }
+    
+    .row {
+      position: relative;
+      display: block;
+      width: 100%;
+      height: 40px;
+      border-bottom: 1px solid #AFAFAF;
+      border-radius: 45px;
+      border-width: 0px;
+      transition: transform 0.2s ease-in-out;
+    }
+    
+   /* .top {
+      position: relative; 
+      display: inline-block;
+      width: 75%;
+      line-height: 45px;
+      
+    } */
+  
+    .name {
+      position: relative;
+      display: inline-block;
+      width: 75%;
+      line-height: 45px;
+      transition: transform 0.2s ease-in-out;
+    }
+  
+    
+    .score {
+      position: relative;
+      display: inline-block;
+      width: 25%;
+    }
+    
+    .row:nth-child(1) {
+      background: gold;
+      border-radius: 20px;
+      transition: transform 0.2s ease-in-out;
+    }
+    
+    .row:nth-child(2) {
+      background: #c0c0c0;
+      border-radius: 45px;
+      transition: transform 0.2s ease-in-out;  
+    }
+    
+    .row:nth-child(3) {
+      background: #cd7f32;
+      border-radius: 45px;
+      transition: transform 0.2s ease-in-out;
+    }

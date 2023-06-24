@@ -11,14 +11,58 @@ const totalColumns = 8;
 const totalRows = 6;
 const totalCells = totalColumns * totalRows;
 let fruitElements = [];
+let score = 0;
+let matchedCount = 0
 
-// Create a randomized fruit grid
+
+// Create a randomized fruit grid without initial matches
 function createRandomizedFruitGrid() {
   fruitElements = [];
   for (let i = 0; i < totalCells; i++) {
     const randomFruit = getRandomFruit();
     fruitElements.push(randomFruit);
   }
+
+  while (hasInitialMatches()) {
+    // Regenerate the fruit grid until there are no initial matches
+    fruitElements = [];
+    for (let i = 0; i < totalCells; i++) {
+      const randomFruit = getRandomFruit();
+      fruitElements.push(randomFruit);
+    }
+  }
+
+  performAutoPop();
+}
+
+// Check if there are any initial matches in the fruit grid
+function hasInitialMatches() {
+  for (let row = 0; row < totalRows; row++) {
+    for (let col = 0; col < totalColumns; col++) {
+      const index = row * totalColumns + col;
+
+      // Check horizontal matches
+      if (col >= 2) {
+        if (
+          fruitElements[index] === fruitElements[index - 1] &&
+          fruitElements[index] === fruitElements[index - 2]
+        ) {
+          return true;
+        }
+      }
+
+      // Check vertical matches
+      if (row >= 2) {
+        if (
+          fruitElements[index] === fruitElements[index - totalColumns] &&
+          fruitElements[index] === fruitElements[index - 2 * totalColumns]
+        ) {
+          return true;
+        }
+      }
+    }
+  }
+  return false;
 }
 
 
@@ -31,29 +75,51 @@ function getRandomFruit() {
   return fruits.splice(randomIndex, 1)[0];
 }
 
+// Check if two positions are adjacent
+function isAdjacent(position1, position2) {
+  const row1 = Math.floor(position1 / totalColumns);
+  const col1 = position1 % totalColumns;
+  const row2 = Math.floor(position2 / totalColumns);
+  const col2 = position2 % totalColumns;
+
+  return (
+    (Math.abs(row1 - row2) === 1 && col1 === col2) ||
+    (Math.abs(col1 - col2) === 1 && row1 === row2)
+  );
+}
+
 
 // Perform a move on the game board
 function performMove(selectedIndex, destinationIndex) {
-    const selectedFruit = fruitElements[selectedIndex];
-    const destinationFruit = fruitElements[destinationIndex];
-  
-    // Swap the fruits
-    fruitElements[selectedIndex] = destinationFruit;
-    fruitElements[destinationIndex] = selectedFruit;
-  
-    // Check if the move results in a match
-    const matchedIndexes = checkMatches();
-    if (matchedIndexes.length > 0) {
-      removeFruits(matchedIndexes);
-      replacePoppedFruits();
-      generateNewFruits();
-      performAutoPop(); 
-    } else {
-      // Revert the swap if no match is formed
-      fruitElements[selectedIndex] = selectedFruit;
-      fruitElements[destinationIndex] = destinationFruit;
-    }
+  const selectedFruit = fruitElements[selectedIndex];
+  const destinationFruit = fruitElements[destinationIndex];
+
+  // Check if the move is valid (adjacent positions)
+  if (!isAdjacent(selectedIndex, destinationIndex)) {
+    console.log('Invalid move: The selected and destination positions are not adjacent.');
+    return;
   }
+
+  // Swap the fruits
+  fruitElements[selectedIndex] = destinationFruit;
+  fruitElements[destinationIndex] = selectedFruit;
+
+  // Check if the move results in a match
+  const matchedIndexes = checkMatches();
+  if (matchedIndexes.length > 0) {
+    removeFruits(matchedIndexes);
+    replacePoppedFruits();
+    generateNewFruits();
+    performAutoPop();
+    score += 5 * matchedCount;
+  } else {
+    // Revert the swap if no match is formed
+    fruitElements[selectedIndex] = selectedFruit;
+    fruitElements[destinationIndex] = destinationFruit;
+    console.log('Invalid move: The move does not result in a match.');
+  }
+}
+
   
   // Perform automatic popping of matched fruits
   function performAutoPop() {
@@ -90,6 +156,7 @@ function checkMatches() {
           for (let i = col - count; i < col; i++) {
             matchedIndexes.push(row * totalColumns + i);
           }
+          matchedCount++;
         }
         currentFruit = fruitElements[index];
         count = 1;
@@ -100,6 +167,7 @@ function checkMatches() {
       for (let i = totalColumns - count; i < totalColumns; i++) {
         matchedIndexes.push(row * totalColumns + i);
       }
+      matchedCount++
     }
   }
 
@@ -117,6 +185,7 @@ function checkMatches() {
           for (let i = row - count; i < row; i++) {
             matchedIndexes.push(i * totalColumns + col);
           }
+          matchedCount++;
         }
         currentFruit = fruitElements[index];
         count = 1;
@@ -127,12 +196,17 @@ function checkMatches() {
       for (let i = totalRows - count; i < totalRows; i++) {
         matchedIndexes.push(i * totalColumns + col);
       }
+      matchedCount++;
     }
   }
 
   return matchedIndexes;
 }
 
+
+function resetScore() {
+  score = 0;
+}
 // Remove fruits at the matched indexes
 function removeFruits(matchedIndexes) {
   for (const index of matchedIndexes) {
@@ -167,6 +241,7 @@ function generateNewFruits() {
       }
     }
   }
+  performAutoPop(); 
 }
 
 
@@ -204,15 +279,22 @@ function serveStaticFile(req, res) {
     }
   
     // Handle other requests
-    if (req.method === 'GET' && req.url === '/game') {
+    if (req.method === 'POST' && req.url === '/game') {
+      // Get the level from the request body
+      let body = '';
+      req.on('data', (chunk) => {
+        body += chunk;
+      });
+      req.on('end', () => {
+        resetScore();
+        createRandomizedFruitGrid();
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify({ fruits: fruitElements,  score: score }));
+      });
+    } else if (req.method === 'GET' && req.url === '/game') {
       // Return the game state
       res.setHeader('Content-Type', 'application/json');
-      res.end(JSON.stringify({ fruits: fruitElements }));
-    } else if (req.method === 'POST' && req.url === '/game/restart') {
-      // Reset the game state
-      createRandomizedFruitGrid();
-      res.statusCode = 200;
-      res.end();
+      res.end(JSON.stringify({ fruits: fruitElements, score: score }));
     } else if (req.method === 'POST' && req.url === '/game/move') {
       // Handle a move request
       let body = '';
@@ -223,7 +305,7 @@ function serveStaticFile(req, res) {
         const { selectedIndex, destinationIndex } = JSON.parse(body);
         performMove(selectedIndex, destinationIndex);
         res.setHeader('Content-Type', 'application/json');
-        res.end(JSON.stringify({ fruits: fruitElements }));
+        res.end(JSON.stringify({ fruits: fruitElements, score: score }));
       });
     } else {
       // Serve static files
@@ -236,3 +318,6 @@ function serveStaticFile(req, res) {
     createRandomizedFruitGrid();
     console.log(`Server running on port ${port}`);
   });
+  
+  
+  

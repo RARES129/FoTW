@@ -11,22 +11,23 @@
   <title>GamePage</title>
 </head>
 <body>
-<div id="timer" class="timer">Time left:05:00</div>
-    <div id="score" class="score">Score:0</div>
-    <div id="moves" class="moves">Moves:25</div>
+  <div id="timer" class="timer">Time left:05:00</div>
+  <div id="score" class="score">Score:0</div>
+
 
   <div class="game_page">
     <!-- Fruit grid will be dynamically generated here -->
   </div>
- <div class="game_buttons">
-      <button id="restartButton" onclick="window.location.href='/game';">
-        Restart level
-      </button>
-      <br />
-      <button id="quitLvl" onclick="window.location.href='/home';">
-        Quit level
-      </button>
-    </div>
+  <div class="game_buttons">
+    <button id="restartButton" onclick="restart();">
+      Restart level
+    </button>
+    <br />
+    <button id="pauseButton" onclick="toggleTimerDisplay()">Pause</button>
+    <button id="quitLvl" onclick="quitLevel();">
+      Quit level
+    </button>
+  </div>
 
   <!-- top bar -->
     <input class="menu-icon" type="checkbox" id="menu-icon" name="menu-icon" />
@@ -41,5 +42,78 @@
     </nav>
     <script src="../public/ChangeLanguage.js"></script>
     <script src="../public/client.js"></script>
+
+  <script src="../public/ChangeLanguage.js"></script>
+  <script src="../public/client.js"></script>
+  <script>
+    var time = 5 * 60;
+    var isPaused = false;
+    var timerInterval;
+
+    function formatTime(seconds) {
+      var minutes = Math.floor(seconds / 60);
+      var remainingSeconds = seconds % 60;
+      return (
+        minutes.toString().padStart(2, '0') +
+        ':' +
+        remainingSeconds.toString().padStart(2, '0')
+      );
+    }
+
+    function startTimer() {
+      var timerElement = document.getElementById('timer');
+      timerElement.textContent = 'Time left: ' + formatTime(time);
+
+      if (time === 0) {
+        
+        window.location.href ='/select_lvl';
+        alert("Time's up!");
+      } else {
+        time--;
+      }
+    }
+
+    function toggleTimer() {
+      var pauseButton = document.getElementById('pauseButton');
+      isPaused = !isPaused;
+
+      if (isPaused) {
+        clearInterval(timerInterval);
+        pauseButton.textContent = 'Resume';
+      } else {
+        timerInterval = setInterval(startTimer, 1000);
+        pauseButton.textContent = 'Pause';
+      }
+    }
+
+    function toggleTimerDisplay() {
+      var gamePageElement = document.querySelector('.game_page');
+      var pauseButtonElement = document.getElementById('pauseButton');
+      var pauseButtonElement = document.getElementById('popup');
+
+      if (gamePageElement.classList.contains('paused')) {
+        gamePageElement.classList.remove('paused');
+        pauseButtonElement.textContent = 'Pauză';
+
+        // Reia cronometrul
+        timerInterval = setInterval(startTimer, 1000);
+      } else {
+        gamePageElement.classList.add('paused');
+        pauseButtonElement.textContent = 'Continua';
+
+        // Oprește cronometrul
+        clearInterval(timerInterval);
+      }
+    }
+
+  function showPopup() {
+  var popupElement = document.getElementById('popup');
+
+  popupElement.style.display = 'block';
+  gamePageElement.classList.add('paused');
+}
+
+    timerInterval = setInterval(startTimer, 1000);
+  </script>
   </body>
 </html>

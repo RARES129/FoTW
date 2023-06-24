@@ -4,8 +4,14 @@ var appRootPath = require("app-root-path");
 var path = require("path");
 var RegisterRoute = require("./registerDB.js");
 var LoginRoute = require("./loginDB.js");
+
+var LeaderboardRoute = require("./leaderboard.js");
+var AdminRoute = require("./admin.js");
 var sendEmail = require("./help.js");
 var cookie = require("cookie");
+const Parser = require('rss-parser');
+const parser = new Parser();
+
 
 function handleRequest(req, res) {
   var requestUrl = url.parse(req.url).pathname;
@@ -15,7 +21,11 @@ function handleRequest(req, res) {
       requestUrl === "/game" ||
       requestUrl === "/select_lvl" ||
       requestUrl === "/about" ||
-      requestUrl === "/help") &&
+
+      requestUrl === "/help" ||
+      requestUrl === "/leaderboard" ||
+      requestUrl === "/admin" ) &&
+
     !isLoggedIn(req)
   ) {
     res.statusCode = 302;
@@ -43,8 +53,13 @@ function handleRequest(req, res) {
     fsPath = path.resolve(appRootPath + "/src/html/gamepage.html");
   } else if (requestUrl === "/select_lvl") {
     fsPath = path.resolve(appRootPath + "/src/html/select level.html");
+  } else if (requestUrl === "/leaderboard") {
+    fsPath = path.resolve(appRootPath + "/src/html/leaderboard.html");
+    res.setHeader("Content-Type", "text/html"); // Adaugă acest rând pentru a seta tipul de conținut al răspunsului la text/html
   } else if (requestUrl === "/about") {
     fsPath = path.resolve(appRootPath + "/src/html/about.html");
+  } else if (requestUrl === "/admin") {
+    fsPath = path.resolve(appRootPath + "/src/html/admin.html");
   } else if (path.extname(requestUrl) === ".css") {
     fsPath = path.resolve(appRootPath + "/src" + requestUrl);
     res.setHeader("Content-Type", "text/css");
@@ -73,7 +88,10 @@ function handleRequest(req, res) {
   } else if (requestUrl === "/logout") {
     res.setHeader(
       "Set-Cookie",
-      "Logat=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
+      [
+        `Username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`,
+        `Logat=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`
+      ]
     );
     res.statusCode = 302;
     res.setHeader("Location", "/");
@@ -97,11 +115,12 @@ function isLoggedIn(req) {
   var cookies = cookie.parse(req.headers.cookie || "");
 
   if (cookies.Logat) {
-
     return true;
   } else {
     return false;
   }
 }
 
+
 module.exports = handleRequest;
+

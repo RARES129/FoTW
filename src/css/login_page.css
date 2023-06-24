@@ -26,7 +26,6 @@
 }
 
 .logo img {
-  max-width: 30%;
   height: auto;
   display: flex;
   flex-wrap: wrap;

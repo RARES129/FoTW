@@ -23,7 +23,7 @@ function handleLoginRequest(req, res) {
 
     if (user && bcrypt.compareSync(password, user.password)) {
       const token = generateToken();
-      res.setHeader("Set-Cookie", `Logat=${token}; Path=/;`);
+      res.setHeader("Set-Cookie", [`Username=${username}; Path=/;`, `Logat=${token}; Path=/;`]);
       res.statusCode = 200;
       res.setHeader("Content-Type", "text/html");
       res.write(`
@@ -73,3 +73,5 @@ function parseFormData(formData) {
 }
 
 module.exports = handleLoginRequest;
+
+console.log('p');
