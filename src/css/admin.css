@@ -1,5 +1,12 @@
 .admin {
     /*display: grid;*/
+    font-family: "Amatic SC", bold;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 600;
+    outline: none;
+    font-size: x-large;
+    text-align: left;
     grid-template-columns: repeat(8, 1fr);
     grid-gap: 0%;
     width: 44%;
@@ -8,8 +15,8 @@
     padding: 0.5%;
     background: transparent;
     backdrop-filter: blur(20px);
-    border-radius: 45px;
-    border: 5px solid green;
+    border-radius: 35px;
+    border: 3px solid green;
     box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.3), 0 0 0 2px green,
       0.3em 0.3em 1em black;
     background-repeat: no-repeat;
@@ -19,6 +26,19 @@
     margin-top: 3%;
     margin-left: 3%;
     }
+
+.admin h2 {
+  text-align: center;
+  margin-top: 1%;
+}
+
+.logo img{
+  display: flex;
+  max-width: 35%;
+  position: absolute;
+  margin-left: 57%;
+  margin-top:2%;
+}
 
 .info {
     position: relative;

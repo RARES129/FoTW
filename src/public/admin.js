@@ -1,42 +1,32 @@
 require("dotenv").config();
-var url = require("url");
 var fs = require("fs");
 const { MongoClient } = require("mongodb");
 const mongoURL = process.env.DB_URL;
 const dbName = process.env.DB_NAME;
-const Parser= require("rss-parser");
 
 
-// Definirea URL-ului și opțiunilor de conectare
 
-// Creează o funcție asincronă pentru a obține utilizatorii și a extrage toate informațiile
 async function getAdmin() {
-  // Crează un nou client MongoDB
-  // const client = new MongoClient(url);
+
   const client = new MongoClient(mongoURL);
   try {
-    // Conectează-te la baza de date
+   
     await client.connect();
 
-    // Obține referința la baza de date "FoTW"
     const db = client.db(dbName);
 
-    // Obține referința la colecția "users"
     const usersCollection = db.collection('users');
 
-    // Obține toți utilizatorii și extrage toate informațiile
     const users = await usersCollection.find().toArray();
 
-    console.log(users);
-    // Returnează array-ul de utilizatori
     return users;
   } catch (error) {
     console.error('A apărut o eroare:', error);
   } finally {
-    // Închide conexiunea clientului la baza de date
     await client.close();
   }
 }
+
 
 function generateAdminList(users) {
   const userAdmin = users.map(user => `
@@ -60,7 +50,8 @@ function createHTMLFile(userAdmin) {
       return;
     }
 
-    //const updatedContent = fileContent.replace('<!-- Utilizatorii vor fi adăugați aici dinamic -->', userAdmin);
+
+   
 
      const updatedContent= `<!DOCTYPE html>
         <html lang="en">
@@ -74,9 +65,14 @@ function createHTMLFile(userAdmin) {
             <link rel="stylesheet" type="text/css" href="../css/responsive.css" />
             <link rel="icon" type="image/x-icon" href="../css/img/Logo.png" />
             <title>Admin</title>
+            
           </head>
           <body>
+          <div class="logo">
+          <img src="../css/img/LogoNegru2.png" alt="LogoNegru2" /> <br />
+        </div>
             <div class="admin" id="adminPanel">
+            <h2>All users:</h2>
               <ul id="user-list">
                 ${userAdmin}
               </ul>
@@ -86,14 +82,12 @@ function createHTMLFile(userAdmin) {
             <label for="menu-icon"></label>
             <nav class="nav">
               <ul class="MenuButtons">
-                <li><a href="/">Logout</a></li>
+                <li><a href="/home"> Home</a></li>
                 <li><a href="/help">Help</a></li>
                 <li><a href="/about">About</a></li>
-                <li><a href="/home"> Home</a></li>
+                <li><a href="/">Logout</a></li>
               </ul>
             </nav>
-        
-          
           </body>
         </html>`
 
@@ -110,7 +104,7 @@ function createHTMLFile(userAdmin) {
     });
   });
 }
-// Apelul funcției pentru obținerea utilizatorilor și generarea conținutului HTML
+function updateAdmin() {
 getAdmin()
   .then(users => {
     const htmlContent1 = generateAdminList(users);
@@ -119,7 +113,11 @@ getAdmin()
   .catch(error => {
     console.error('A apărut o eroare:', error);
   });
+}
 
+updateAdmin();
+
+setInterval(updateAdmin, 5000);
 
 
 

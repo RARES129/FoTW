@@ -1,5 +1,6 @@
 .home {
   text-align: center;
+  margin-top: 7%;
 }
 
 .home img {
@@ -11,6 +12,14 @@
   margin: 0 auto;
 }
 
+/* username home page */
+.home input {
+  border: 2px solid #111;
+  border-radius: 20px;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+/* ------- */
 
 /* butoane */
 .home_buttons button {
@@ -41,5 +50,37 @@
 }
 
 .home_buttons button:active {
+  box-shadow: 0 0 50px lightgreen, 0 0 50px lightgreen;
+}
+
+
+.admin_button button {
+  font-family: "Amatic SC", bold;
+  cursor: pointer;
+  margin-top: 1%;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 600;
+  outline: none;
+  border: none;
+  border-radius: 40px;
+  border: 2px solid rgb(0, 94, 0);
+  color: white;
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgb(0, 175, 0),
+    rgb(0, 115, 0) 10%,
+    rgb(205, 135, 0) 10%,
+    rgb(255, 175, 20) 20%
+  );
+  background-size: 100%;
+  transition: background 0.3s ease-in-out;
+}
+
+.admin_button button:hover {
+  background-position: 150px;
+}
+
+.admin_button button:active {
   box-shadow: 0 0 50px lightgreen, 0 0 50px lightgreen;
 }

@@ -1,21 +1,89 @@
-// server.js (server-side code)
-
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const { MongoClient } = require('mongodb');
+const cookie = require('cookie');
+const mongoURL = process.env.DB_URL;
+const dbName = process.env.DB_NAME;
 
 
-// Define the game state
+
 const fruits = ['banana', 'capsuna', 'orange', 'kiwi', 'strugure', 'applee'];
 const totalColumns = 8;
 const totalRows = 6;
 const totalCells = totalColumns * totalRows;
 let fruitElements = [];
 let score = 0;
-let matchedCount = 0
+
+async function resetScore(req, res) {
+  try {
+    const cookies = cookie.parse(req.headers.cookie || "");
+    const username = cookies.username;
+    const client = new MongoClient(mongoURL);
+    await client.connect();
+    const db = client.db(dbName);
+
+    const collection = db.collection("users");
+    const user = await collection.findOne({ username });
+    
+    score = user.score - score;
+    await collection.updateOne({ username }, { $set: {score} });
+    await client.close();
+
+  } catch (error) {
+    console.error('Failed to reset user score:', error);
+    throw error;
+  }
+  score = 0;
+}
+async function handleUpdateScoreRequest(req, res) {
+  const url = 'https://fruitsonthewebserver.onrender.com/game';
+  const cookies = cookie.parse(req.headers.cookie || "");
+
+  http.get(url, (response) => {
+    let data = '';
+
+    response.on('data', (chunk) => {
+      data += chunk;
+    });
+
+    response.on('end', () => {
+      try {
+        const jsonData = JSON.parse(data);
+        const score = jsonData.score;
+        const username = cookies.username;
+        updateUserScore(username, score);
+      } catch (error) {
+        console.error('Eroare la analizarea conținutului JSON:', error);
+      }
+    });
+  }).on('error', (error) => {
+    console.error('Eroare la efectuarea cererii HTTP:', error);
+  });
+}
 
 
-// Create a randomized fruit grid without initial matches
+async function updateUserScore(username, score) {
+  try {
+    const client = new MongoClient(mongoURL);
+    await client.connect();
+    const db = client.db(dbName);
+
+    const collection = db.collection("users");
+    const user = await collection.findOne({ username });
+    
+    score = score + user.score;
+    await collection.updateOne({ username }, { $set: {score} });
+    await client.close();
+
+    
+    
+  } catch (error) {
+    console.error('Failed to update user score:', error);
+    throw error;
+  }
+}
+
 function createRandomizedFruitGrid() {
   fruitElements = [];
   for (let i = 0; i < totalCells; i++) {
@@ -24,7 +92,7 @@ function createRandomizedFruitGrid() {
   }
 
   while (hasInitialMatches()) {
-    // Regenerate the fruit grid until there are no initial matches
+
     fruitElements = [];
     for (let i = 0; i < totalCells; i++) {
       const randomFruit = getRandomFruit();
@@ -35,13 +103,11 @@ function createRandomizedFruitGrid() {
   performAutoPop();
 }
 
-// Check if there are any initial matches in the fruit grid
 function hasInitialMatches() {
   for (let row = 0; row < totalRows; row++) {
     for (let col = 0; col < totalColumns; col++) {
       const index = row * totalColumns + col;
 
-      // Check horizontal matches
       if (col >= 2) {
         if (
           fruitElements[index] === fruitElements[index - 1] &&
@@ -51,7 +117,6 @@ function hasInitialMatches() {
         }
       }
 
-      // Check vertical matches
       if (row >= 2) {
         if (
           fruitElements[index] === fruitElements[index - totalColumns] &&
@@ -66,7 +131,6 @@ function hasInitialMatches() {
 }
 
 
-// Get a random fruit
 function getRandomFruit() {
   if (fruits.length === 0) {
     fruits.push('banana', 'capsuna', 'orange', 'kiwi', 'strugure', 'applee');
@@ -75,7 +139,6 @@ function getRandomFruit() {
   return fruits.splice(randomIndex, 1)[0];
 }
 
-// Check if two positions are adjacent
 function isAdjacent(position1, position2) {
   const row1 = Math.floor(position1 / totalColumns);
   const col1 = position1 % totalColumns;
@@ -89,31 +152,27 @@ function isAdjacent(position1, position2) {
 }
 
 
-// Perform a move on the game board
 function performMove(selectedIndex, destinationIndex) {
   const selectedFruit = fruitElements[selectedIndex];
   const destinationFruit = fruitElements[destinationIndex];
 
-  // Check if the move is valid (adjacent positions)
   if (!isAdjacent(selectedIndex, destinationIndex)) {
     console.log('Invalid move: The selected and destination positions are not adjacent.');
     return;
   }
 
-  // Swap the fruits
   fruitElements[selectedIndex] = destinationFruit;
   fruitElements[destinationIndex] = selectedFruit;
 
-  // Check if the move results in a match
   const matchedIndexes = checkMatches();
   if (matchedIndexes.length > 0) {
     removeFruits(matchedIndexes);
     replacePoppedFruits();
     generateNewFruits();
     performAutoPop();
-    score += 5 * matchedCount;
+    score += 10 * matchedIndexes.length;
   } else {
-    // Revert the swap if no match is formed
+d
     fruitElements[selectedIndex] = selectedFruit;
     fruitElements[destinationIndex] = destinationFruit;
     console.log('Invalid move: The move does not result in a match.');
@@ -121,7 +180,6 @@ function performMove(selectedIndex, destinationIndex) {
 }
 
   
-  // Perform automatic popping of matched fruits
   function performAutoPop() {
     let hasMatchedFruits = true;
     while (hasMatchedFruits) {
@@ -138,11 +196,9 @@ function performMove(selectedIndex, destinationIndex) {
   
 
 
-// Check for matches of 3 or more fruits
 function checkMatches() {
   const matchedIndexes = [];
 
-  // Check horizontally for matches
   for (let row = 0; row < totalRows; row++) {
     let currentFruit = fruitElements[row * totalColumns];
     let count = 1;
@@ -152,26 +208,21 @@ function checkMatches() {
         count++;
       } else {
         if (count >= 3) {
-          // Found a match
           for (let i = col - count; i < col; i++) {
             matchedIndexes.push(row * totalColumns + i);
           }
-          matchedCount++;
         }
         currentFruit = fruitElements[index];
         count = 1;
       }
     }
     if (count >= 3) {
-      // Found a match at the end of the row
       for (let i = totalColumns - count; i < totalColumns; i++) {
         matchedIndexes.push(row * totalColumns + i);
       }
-      matchedCount++
     }
   }
 
-  // Check vertically for matches
   for (let col = 0; col < totalColumns; col++) {
     let currentFruit = fruitElements[col];
     let count = 1;
@@ -181,22 +232,20 @@ function checkMatches() {
         count++;
       } else {
         if (count >= 3) {
-          // Found a match
+
           for (let i = row - count; i < row; i++) {
             matchedIndexes.push(i * totalColumns + col);
           }
-          matchedCount++;
         }
         currentFruit = fruitElements[index];
         count = 1;
       }
     }
     if (count >= 3) {
-      // Found a match at the end of the column
+
       for (let i = totalRows - count; i < totalRows; i++) {
         matchedIndexes.push(i * totalColumns + col);
       }
-      matchedCount++;
     }
   }
 
@@ -204,17 +253,14 @@ function checkMatches() {
 }
 
 
-function resetScore() {
-  score = 0;
-}
-// Remove fruits at the matched indexes
+
+
 function removeFruits(matchedIndexes) {
   for (const index of matchedIndexes) {
     fruitElements[index] = null;
   }
 }
 
-// Replace popped fruits with fruits from above
 function replacePoppedFruits() {
   for (let col = 0; col < totalColumns; col++) {
     let emptyCount = 0;
@@ -231,7 +277,6 @@ function replacePoppedFruits() {
   }
 }
 
-// Generate new fruits to fill the empty spaces
 function generateNewFruits() {
   for (let col = 0; col < totalColumns; col++) {
     for (let row = totalRows - 1; row >= 0; row--) {
@@ -265,38 +310,38 @@ function serveStaticFile(req, res) {
     });
   }
   
+  
   const server = http.createServer((req, res) => {
-    // Set CORS headers
+
     res.setHeader('Access-Control-Allow-Origin', 'https://fruitsontheweb.onrender.com');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
   
-    // Handle CORS preflight request
     if (req.method === 'OPTIONS') {
       res.statusCode = 200;
       res.end();
       return;
     }
-  
-    // Handle other requests
-    if (req.method === 'POST' && req.url === '/game') {
-      // Get the level from the request body
+
+   if (req.method === 'POST' && req.url === '/game') {
+
       let body = '';
       req.on('data', (chunk) => {
         body += chunk;
       });
       req.on('end', () => {
-        resetScore();
+        resetScore(req, res);
         createRandomizedFruitGrid();
         res.setHeader('Content-Type', 'application/json');
-        res.end(JSON.stringify({ fruits: fruitElements,  score: score }));
+        res.end(JSON.stringify({ fruits: fruitElements, score: score }));
       });
     } else if (req.method === 'GET' && req.url === '/game') {
-      // Return the game state
+
       res.setHeader('Content-Type', 'application/json');
       res.end(JSON.stringify({ fruits: fruitElements, score: score }));
     } else if (req.method === 'POST' && req.url === '/game/move') {
-      // Handle a move request
+
       let body = '';
       req.on('data', chunk => {
         body += chunk;
@@ -308,16 +353,14 @@ function serveStaticFile(req, res) {
         res.end(JSON.stringify({ fruits: fruitElements, score: score }));
       });
     } else {
-      // Serve static files
-      serveStaticFile(req, res);
+      serveStaticFile(req, res)
+      res.statusCode = 404;
+      res.end();
     }
+    
   });
-  
   const port = 3001;
   server.listen(port, () => {
     createRandomizedFruitGrid();
     console.log(`Server running on port ${port}`);
   });
-  
-  
-  

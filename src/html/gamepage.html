@@ -11,37 +11,43 @@
   <title>GamePage</title>
 </head>
 <body>
-  <div id="timer" class="timer">Time left:05:00</div>
-  <div id="score" class="score">Score:0</div>
+
+  <div id="timer" class="timer">Time left: 5:00</div>
+  <div id="score" class="score">Score: 0</div>
+  <div id="moves" class="moves">Moves: 25</div>
 
 
   <div class="game_page">
     <!-- Fruit grid will be dynamically generated here -->
   </div>
   <div class="game_buttons">
-    <button id="restartButton" onclick="restart();">
+    <button id="restartButton" onclick="window.location.href='/game';">
       Restart level
     </button>
     <br />
     <button id="pauseButton" onclick="toggleTimerDisplay()">Pause</button>
-    <button id="quitLvl" onclick="quitLevel();">
+    <button id="quitLvl" onclick="window.location.href='/home';">
       Quit level
     </button>
   </div>
 
   <!-- top bar -->
-    <input class="menu-icon" type="checkbox" id="menu-icon" name="menu-icon" />
-    <label for="menu-icon"></label>
-    <nav class="nav">
-      <ul class="MenuButtons">
-        <li><a id="home" href="/home">Home</a></li>
-        <li><a id="help" href="/help">Help</a></li>
-        <li><a id="about" href="/about">About</a></li>
-        <li><a id="logout" href="/logout">Logout</a></li>
-      </ul>
-    </nav>
-    <script src="../public/ChangeLanguage.js"></script>
-    <script src="../public/client.js"></script>
+  <input class="menu-icon" type="checkbox" id="menu-icon" name="menu-icon" />
+  <label for="menu-icon"></label>
+  <nav class="nav">
+    <ul class="MenuButtons">
+      <li><a id="home" href="/home">Home</a></li>
+      <li><a id="help" href="/help">Help</a></li>
+      <li><a id="about" href="/about">About</a></li>
+      <li><a id="logout" href="/logout">Logout</a></li>
+    </ul>
+  </nav>
+
+  <!-- Pop-up pentru timpul expirat -->
+  <div id="popup" class="popup">
+    <h2>Time's Up!</h2>
+    <p>The time has expired.</p>
+  </div>
 
   <script src="../public/ChangeLanguage.js"></script>
   <script src="../public/client.js"></script>
@@ -65,9 +71,9 @@
       timerElement.textContent = 'Time left: ' + formatTime(time);
 
       if (time === 0) {
-        
-        window.location.href ='/select_lvl';
-        alert("Time's up!");
+        clearInterval(timerInterval);
+        timerElement.textContent = "Time's up!";
+        showPopup(); // Afișează pop-up-ul când timpul expiră
       } else {
         time--;
       }
@@ -115,5 +121,5 @@
 
     timerInterval = setInterval(startTimer, 1000);
   </script>
-  </body>
+</body>
 </html>

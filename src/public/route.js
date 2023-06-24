@@ -8,6 +8,7 @@ var LoginRoute = require("./loginDB.js");
 var LeaderboardRoute = require("./leaderboard.js");
 var AdminRoute = require("./admin.js");
 var sendEmail = require("./help.js");
+const { deleteUsers, fdeleteUser, deleteUser } = require("./deleteUser.js");
 var cookie = require("cookie");
 const Parser = require('rss-parser');
 const parser = new Parser();
@@ -16,6 +17,8 @@ const parser = new Parser();
 function handleRequest(req, res) {
   var requestUrl = url.parse(req.url).pathname;
   var fsPath;
+  const parts = requestUrl.split('/');
+  const value = parts[parts.length - 1];
   if (
     (requestUrl === "/home" ||
       requestUrl === "/game" ||
@@ -24,8 +27,7 @@ function handleRequest(req, res) {
 
       requestUrl === "/help" ||
       requestUrl === "/leaderboard" ||
-      requestUrl === "/admin" ) &&
-
+      requestUrl === "/admin") &&
     !isLoggedIn(req)
   ) {
     res.statusCode = 302;
@@ -35,6 +37,26 @@ function handleRequest(req, res) {
   }
 
   if ((requestUrl === "/" || requestUrl === "/register") && isLoggedIn(req)) {
+    res.statusCode = 302;
+    res.setHeader("Location", "/home");
+    res.end();
+    return;
+  }
+
+  if (requestUrl === "/admin/reset" && isAdmin(req)) {
+    deleteUsers();
+    res.statusCode = 302;
+    res.setHeader("Location", "/admin");
+    res.end();
+    return;
+  }
+  else if (requestUrl === `/admin/reset/${value}` && isAdmin(req))  {
+    deleteUser(value);
+    res.statusCode = 302;
+    res.setHeader("Location", "/admin");
+    res.end();
+    return;
+  } else if(requestUrl === "/admin/reset" || requestUrl === `/admin/reset/${value}`){
     res.statusCode = 302;
     res.setHeader("Location", "/home");
     res.end();
@@ -76,6 +98,7 @@ function handleRequest(req, res) {
     fsPath = path.resolve(appRootPath + "/src/html/404.html");
   }
 
+  
   if (requestUrl === "/" && req.method === "POST") {
     LoginRoute(req, res);
     return;
@@ -90,7 +113,8 @@ function handleRequest(req, res) {
       "Set-Cookie",
       [
         `Username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`,
-        `Logat=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`
+        `Logat=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`,
+        `Admin=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`
       ]
     );
     res.statusCode = 302;
@@ -121,6 +145,13 @@ function isLoggedIn(req) {
   }
 }
 
+function isAdmin(req) {
+  var cookies = cookie.parse(req.headers.cookie || "");
+  if (cookies.Admin==="1") {
+    return true;
+  } else {
+    return false;
+  }
+}
 
 module.exports = handleRequest;
-

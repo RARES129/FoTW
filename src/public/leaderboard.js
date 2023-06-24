@@ -1,49 +1,32 @@
 require("dotenv").config();
-var url = require("url");
 var fs = require("fs");
 const { MongoClient } = require("mongodb");
 const mongoURL = process.env.DB_URL;
 const dbName = process.env.DB_NAME;
-const Parser= require("rss-parser");
-
 const { Feed } = require("feed");
 
-
-// Definirea URL-ului și opțiunilor de conectare
-
-// Creează o funcție asincronă pentru a obține utilizatorii și a extrage toate informațiile
 async function getUser() {
-  // Crează un nou client MongoDB
-  // const client = new MongoClient(url);
   const client = new MongoClient(mongoURL);
   try {
-    // Conectează-te la baza de date
     await client.connect();
-
-    // Obține referința la baza de date "FoTW"
     const db = client.db(dbName);
-
-    // Obține referința la colecția "users"
     const usersCollection = db.collection('users');
 
-    // Obține toți utilizatorii și extrage toate informațiile
-    const users = await usersCollection.find().toArray();
+    const users = await usersCollection.find().sort({ score: -1 }).toArray();
 
-    console.log(users);
-    // Returnează array-ul de utilizatori
     return users;
   } catch (error) {
     console.error('A apărut o eroare:', error);
   } finally {
-    // Închide conexiunea clientului la baza de date
     await client.close();
   }
 }
 
+
 function generateUserList(users) {
   const userScore = users.map(user => `
     <li>
-      ${user.username}
+      ${user.username} -
       ${user.score}
     </li>
   `).join('');
@@ -84,6 +67,7 @@ async function generateRSS() {
   });
 }
 
+
 generateRSS()
   .catch(error => {
     console.error('A apărut o eroare:', error);
@@ -98,8 +82,6 @@ function createHTMLFile(userScore) {
       return;
     }
 
-    //const updatedContent = fileContent.replace('<!-- Utilizatorii vor fi adăugați aici dinamic -->', userScore);
-
      const updatedContent= `<!DOCTYPE html>
      <html lang="en">
        <head>
@@ -113,7 +95,10 @@ function createHTMLFile(userScore) {
          <title>Leaderboard</title>
        </head>
        <body>
+       
          <div class="leaderboard" id="leaderboardContainer">
+                              <h2>Leaderboard:</h2>
+
            <ul id="user-list">
            ${userScore}
              
@@ -125,10 +110,11 @@ function createHTMLFile(userScore) {
          <label for="menu-icon"></label>
          <nav class="nav">
            <ul class="MenuButtons">
-             <li><a href="/">Logout</a></li>
+             <li><a href="/home"> Home</a></li>
              <li><a href="/help">Help</a></li>
              <li><a href="/about">About</a></li>
-             <li><a href="/home"> Home</a></li>
+             <li><a href="/">Logout</a></li>
+             
            </ul>
          </nav>
      
@@ -153,14 +139,17 @@ function createHTMLFile(userScore) {
 
 
 
-// Apelul funcției pentru obținerea utilizatorilor și generarea conținutului HTML
-getUser()
-  .then(users => {
-    const htmlContent1 = generateUserList(users);
-    createHTMLFile(htmlContent1);
-  })
-  .catch(error => {
-    console.error('A apărut o eroare:', error);
-  });
+function updateLeaderboard() {
+  getUser()
+    .then(users => {
+      const htmlContent1 = generateUserList(users);
+      createHTMLFile(htmlContent1);
+    })
+    .catch(error => {
+      console.error('A apărut o eroare:', error);
+    });
+}
 
-  
+updateLeaderboard();
+
+setInterval(updateLeaderboard, 5000);

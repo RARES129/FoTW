@@ -305,8 +305,9 @@
           <h4>2.4 Design and Implementation Constraints</h4>
 
           <p>
-            Fruits On The Web is developed in [...] and uses HTML, CSS and
+            Fruits On The Web is developed in node.js and uses HTML, CSS and
             JavaScript for its visualization engine.
+            It uses mongoDB for data storage.
           </p>
         </section>
       </section>
@@ -377,6 +378,24 @@
               <img
                 src="../screenshots/game_page.jpg"
                 alt="Game Page Screenshot"
+                width="1000"
+              />
+            </figure>
+
+            <figure typeof="sa:image">
+              <figcaption>Leaderboard Page</figcaption>
+              <img
+                src="../screenshots/leaderboard.jpg"
+                alt="Leaderboard Page Screenshot"
+                width="1000"
+              />
+            </figure>
+
+            <figure typeof="sa:image">
+              <figcaption>Admin Page</figcaption>
+              <img
+                src="../screenshots/admin_page.jpg"
+                alt="Admin Page Screenshot"
                 width="1000"
               />
             </figure>
@@ -469,7 +488,26 @@
             Users can play the game by matching 3 or more of the same fruit
             vertically/horizontally/diagonally, restart the level, quit the
             level and navigate to other pages from this page. The game is timed
-            and scored.
+            and scored. It also features a pause button that stops the timer in 
+            case the user wants to take a break from the current level.
+          </p>
+        </section>
+
+        <section>
+          <h4>4.8 Leaderboard Page</h4>
+
+          <p>
+            Users are able to see their scores beginning from the highest score to the lowest.
+            The leaderboard gets updated constantly so the users only need to refresh the page to see updated information.
+          </p>
+        </section>
+
+        <section>
+          <h4>4.9 Admin Page</h4>
+          <p>
+            Certain users that have an admin role will be able to see the username, first name, last name, email and score of all the registered users that have used the application.
+            They can also delete any user they'd like and also they can delete all the users at once, emptying the database.
+            This page is also updated constantly and by refreshing the page the lates information gets shown.
           </p>
         </section>
       </section>

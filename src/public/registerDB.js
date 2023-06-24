@@ -1,6 +1,4 @@
 require("dotenv").config();
-var url = require("url");
-var fs = require("fs");
 const bcrypt = require("bcrypt");
 var MongoClient = require("mongodb").MongoClient;
 
@@ -96,6 +94,8 @@ async function insertUser(firstName, lastName, email, username, password) {
     email,
     username,
     password: hashedPassword,
+    score: 0,
+    admin: "0",
   });
 
   client.close();

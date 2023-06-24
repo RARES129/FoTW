@@ -7,14 +7,8 @@
   .menu-icon:not(:checked) + label {
     right: 55px;
   }
-  .home {
-    margin-top: 7%;
-  }
-  .timer,.score {
-    font-size: 350%;
-  }
-  .logo img{
-    max-width: 35%;
+  .home input {
+    font-size: 200%;
   }
   .login {
     width: 30%;
@@ -53,27 +47,14 @@
   .about_titlu h1 {
     font-size: 350%;
   }
-  .game_page{
-    width: 50%;
-    height: 30%;
-    margin-top: -3%;
-    border-radius: 45px;
-    border: 5px solid green;
-  }
 }
 /* 
   ##Device = Laptops, Desktops
   ##Screen = B/w 1025px to 1280px
 */
 @media screen and (min-width: 1025px) and (max-width: 1280px) {
-  .home {
-    margin-top: 12%;
-  }
-  .timer,.score {
-    font-size: 350%;
-  }
-  .logo img{
-    max-width: 40%;
+  .home input {
+    font-size: 180%;
   }
   .login {
     width: 35%;
@@ -111,13 +92,6 @@
   .about_titlu h1 {
     font-size: 300%;
   }
-  .game_page{
-    width: 60%;
-    height: 40%;
-    margin-top: 0%;
-    border: 5px solid green;
-    border-radius: 45px;
-  }
 }
 
 /* 
@@ -125,14 +99,8 @@
   ##Screen = B/w 768px to 1024px
 */
 @media screen and (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-  .home {
-    margin-top: 20%;
-  }
-  .timer,.score {
-    font-size: 300%;
-  }
-  .logo img{
-    max-width: 55%;
+  .home input {
+    font-size: 160%;
   }
   .login {
     width: 40%;
@@ -170,13 +138,6 @@
   .about_titlu h1 {
     font-size: 300%;
   }
-  .game_page{
-    width: 70%;
-    height: 50%;
-    margin-top: 5%;
-    border: 3px solid green;
-    border-radius: 35px;
-  }
 }
 
 /* 
@@ -184,14 +145,8 @@
   ##Screen = B/w 768px to 1024px
 */
 @media screen and (min-width: 768px) and (max-width: 1024px) {
-  .home {
-    margin-top: 20%;
-  }
-  .timer,.score {
-    font-size: 300%;
-  }
-  .logo img{
-    max-width: 55%;
+  .home input {
+    font-size: 140%;
   }
   .login {
     width: 43%;
@@ -227,13 +182,6 @@
   .about_titlu h1 {
     font-size: 275%;
   }
-  .game_page{
-    width: 70%;
-    height: 50%;
-    margin-top: 5%;
-    border: 3px solid green;
-    border-radius: 35px;
-  }
 }
 
 /* 
@@ -241,14 +189,8 @@
   ##Screen = B/w 481px to 767px
 */
 @media screen and (min-width: 481px) and (max-width: 767px) {
-  .home {
-    margin-top: 30%;
-  }
-  .timer,.score {
-    font-size: 200%;
-  }
-  .logo img{
-    max-width: 60%;
+  .home input {
+    font-size: 120%;
   }
   .login {
     width: 55%;
@@ -286,14 +228,6 @@
   .about_titlu h1 {
     font-size: 200%;
   }
-  .game_page{
-    width: 70%;
-    height: 50%;
-    margin-top: 15%;
-    border: 2px solid green;
-    border-radius: 25px;
-  }
-
 }
 
 /* 
@@ -301,14 +235,8 @@
   ##Screen = B/w 320px to 479px
 */
 @media screen and (max-width: 480px) {
-  .home {
-    margin-top: 30%;
-  }
-  .timer,.score {
-    font-size: 200%;
-  }
-  .logo img{
-    max-width: 70%;
+  .home input {
+    font-size: 100%;
   }
   .login {
     width: 63%;
@@ -345,12 +273,4 @@
   .about_titlu h1 {
     font-size: 170%;
   }
-  .game_page{
-    width: 90%;
-    height: 80%;
-    margin-top: 40%;
-    border: 1px solid green;
-    border-radius: 15px;
-  }
-
 }
