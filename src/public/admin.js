@@ -42,7 +42,7 @@ function generateAdminList(users) {
 }
 
 function createHTMLFile(userAdmin) {
-  const filePath = ('../src/html/admin.html');
+  const filePath = ('./src/html/admin.html');
   
   fs.readFile(filePath, 'utf-8', (error, fileContent) => {
     if (error) {
