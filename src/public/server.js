@@ -6,9 +6,7 @@ const totalRows = 6;
 const totalCells = totalColumns * totalRows;
 let fruitElements = [];
 let score = 0;
-
 var Database = require("./database");
-var http = require("http");
 
 const db = new Database(process.env.DB_URL, process.env.DB_NAME);
 
