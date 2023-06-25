@@ -3,9 +3,6 @@ const fs = require("fs");
 const { MongoClient } = require("mongodb");
 const Database = require("./database");
 
-const mongoURL = process.env.DB_URL;
-const dbName = process.env.DB_NAME;
-
 function generateAdminList(users) {
   const userAdmin = users
     .map(
@@ -80,7 +77,7 @@ function createHTMLFile(userAdmin) {
 }
 
 async function updateAdmin() {
-  const database = new Database(mongoURL, dbName);
+  const database = new Database(process.env.DB_URL, process.env.DB_NAME);
 
   try {
     await database.connect();

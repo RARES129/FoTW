@@ -73,11 +73,17 @@ function handleRequest(req, res) {
   if (requestUrl === "/admin/reset" && isAdmin(req)) {
     db.deleteAllUsers(); 
     res.statusCode = 302;
-    res.setHeader("Location", "/admin");
+    res.setHeader("Location", "/logout");
     res.end();
     return;
   } else if (requestUrl === `/admin/reset/${value}` && isAdmin(req)) {
     db.deleteUser(value); 
+    res.statusCode = 302;
+    res.setHeader("Location", "/admin");
+    res.end();
+    return;
+  }else if (requestUrl === `/admin/setadmin/${value}` && isAdmin(req)) {
+    db.setAdmin(value); 
     res.statusCode = 302;
     res.setHeader("Location", "/admin");
     res.end();

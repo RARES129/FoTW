@@ -24,8 +24,7 @@ async function handleLoginRequest(req, res) {
 
     try {
       await database.connect();
-      const user = await database.findOne("users", { username });
-
+      const user = await database.findOne("users",{username});
       var isAdmin="";
       if (user && bcrypt.compareSync(password, user.password)) {
         const token = generateToken();

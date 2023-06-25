@@ -2,9 +2,6 @@ require("dotenv").config();
 const bcrypt = require("bcrypt");
 const Database = require("./database");
 
-const mongoURL = process.env.DB_URL;
-const dbName = process.env.DB_NAME;
-
 async function handleRegisterRequest(req, res) {
   let body = "";
   req.on("data", (chunk) => {
@@ -13,7 +10,7 @@ async function handleRegisterRequest(req, res) {
 
   req.on("end", async () => {
     const { firstName, lastName, email, username, password } = parseFormData(body);
-    const database = new Database(mongoURL, dbName);
+    const database = new Database(process.env.DB_URL, process.env.DB_NAME);
 
     try {
       await database.connect();

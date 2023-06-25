@@ -1,7 +1,7 @@
 var nodemailer = require("nodemailer");
 var querystring = require("querystring");
 const { v4: uuidv4 } = require("uuid");
-const { MongoClient } = require("mongodb");
+const Database = require("./database");
 require("dotenv").config();
 
 const mongoURL = process.env.DB_URL;
@@ -25,15 +25,12 @@ function generateToken() {
   return uuidv4();
 }
 
-async function searchDB(req, res, username) {
+async function searchDB(username) {
+  const db = new Database(process.env.DB_URL, process.env.DB_NAME);
   try {
-    const client = new MongoClient(mongoURL);
-    await client.connect();
-    const db = client.db(dbName);
-
-    const collection = db.collection("users");
-    const user = await collection.findOne({ username });
-    await client.close();
+    await db.connect();
+    const user = await db.findOne("users",{username});
+    await db.disconnect();
     if (user) {
       return user.email;
     } else {
@@ -55,7 +52,7 @@ function sendEmail(req, res) {
   req.on("end", async () => {
     var postData = querystring.parse(body);
     resetUsername = postData.username;
-    var email = await searchDB(req, res, resetUsername);
+    var email = await searchDB(resetUsername);
     console.log(email);
 
     var message =

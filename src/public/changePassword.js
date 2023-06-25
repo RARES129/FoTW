@@ -1,30 +1,17 @@
 const { getToken, getUsername } = require("./resetPassword.js");
 var querystring = require("querystring");
-const { MongoClient } = require("mongodb");
 const bcrypt = require("bcrypt");
+var Database = require("./database");
 require("dotenv").config();
 
-const mongoURL = process.env.DB_URL;
-const dbName = process.env.DB_NAME;
+const db = new Database(process.env.DB_URL, process.env.DB_NAME);
 
-async function updateDB(req, res, username, password) {
-  try {
-    const client = new MongoClient(mongoURL);
-    await client.connect();
-    const db = client.db(dbName);
-    const collection = db.collection("users");
-    const user = await collection.findOne({ username });
-    const hashedPassword = await bcrypt.hash(password, 10);
-    await collection.updateOne(
-      { username },
-      { $set: { password: hashedPassword } }
-    );
-    await client.close();
-  } catch (error) {
-    console.error("Failed to reset password:", error);
-    throw error;
-  }
+
+async function startServer() {
+  await db.connect();
 }
+
+startServer();
 
 function changePassword(req, res) {
   var body = "";
@@ -39,7 +26,7 @@ function changePassword(req, res) {
     const correctToken = getToken();
     const username = getUsername();
     if (token === correctToken) {
-      updateDB(req, res, username, password);
+      db.resetPassword(username, password);
       res.statusCode = 200;
       res.setHeader("Content-Type", "text/html");
       res.write(`

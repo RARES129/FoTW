@@ -1,4 +1,5 @@
 const { MongoClient } = require("mongodb");
+const bcrypt = require("bcrypt");
 const mongoURL = process.env.DB_URL;
 const dbName = process.env.DB_NAME;
 
@@ -53,7 +54,7 @@ class Database {
     }
   }
 
-  async getUser() {
+  async getUsers() {
     try {
       const usersCollection = this.db.collection('users');
       const users = await usersCollection.find().toArray();
@@ -91,6 +92,20 @@ class Database {
     }
   }
 
+  async setAdmin(username) {
+    try {
+      const usersCollection = this.db.collection('users');
+      const user = await usersCollection.findOne({ username });
+      await usersCollection.updateOne(
+        { username },
+        { $set: { admin: "1" } }
+      );
+    } catch (error) {
+      console.error("Failed to set admin status:", error);
+      throw error;
+    }
+  }  
+
   async getAdmin() {
     try {
       const usersCollection = this.db.collection('users');
@@ -100,9 +115,22 @@ class Database {
       console.error('An error occurred:', error);
     }
   }
+
+  
+async resetPassword(username, password) {
+  try {
+    const usersCollection = this.db.collection('users');
+    const user = await usersCollection.findOne({ username });
+    const hashedPassword = await bcrypt.hash(password, 10);
+    await usersCollection.updateOne(
+      { username },
+      { $set: { password: hashedPassword } }
+    );
+  } catch (error) {
+    console.error("Failed to reset password:", error);
+    throw error;
+  }
 }
-
-
-
+}
 
 module.exports = Database;

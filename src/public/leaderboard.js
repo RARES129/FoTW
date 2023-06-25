@@ -5,22 +5,18 @@ const { Feed } = require("feed");
 const Parser = require("rss-parser");
 const Database = require("./database");
 
-
-const mongoURL = process.env.DB_URL;
-const dbName = process.env.DB_NAME;
-
 async function generateRSS() {
-  const db = new Database(mongoURL, dbName);
+  const db = new Database(process.env.DB_URL, process.env.DB_NAME);
   try {
     await db.connect();
 
-    const users = await db.getUser();
+    const users = await db.getUsers();
 
     const feed = new Feed({
       title: "Leaderboard flux RSS",
       description: "Leaderboard updates",
-      id: "https://fruitsonthewebserver.onrender.com/leaderboard",
-      link: "https://fruitsonthewebserver.onrender.com/leaderboard",
+      id: "https://fruitsontheweb.onrender.com/leaderboard",
+      link: "https://fruitsontheweb.onrender.com/leaderboard",
       language: "ro",
     });
 
@@ -28,7 +24,7 @@ async function generateRSS() {
       feed.addItem({
         title: user.username,
         id: user.score,
-        link: `https://fruitsonthewebserver.onrender.com/leaderboard/users/${user.username}`,
+        link: `https://fruitsontheweb.onrender.com/leaderboard/users/${user.username}`,
         description: `Leaderboard update for ${user.username}`,
         date: new Date(),
       });
@@ -55,7 +51,7 @@ generateRSS().catch((error) => {
 });
 
 function createHTMLFile(userScore) {
-  const filePath = './src/html/leaderboard.html';
+  const filePath = "./src/html/leaderboard.html";
 
   fs.readFile(filePath, "utf-8", (error, fileContent) => {
     if (error) {
@@ -129,11 +125,11 @@ function createHTMLFile(userScore) {
 
 
 async function updateLeaderboard() {
-  const db = new Database(mongoURL, dbName);
+  const db = new Database(process.env.DB_URL, process.env.DB_NAME);
   try {
     await db.connect();
 
-    const users = await db.getUser();
+    const users = await db.getUsers();
 
     const htmlContent1 = generateUserList(users);
     createHTMLFile(htmlContent1);
