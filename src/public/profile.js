@@ -8,7 +8,7 @@ const mongoURL = process.env.DB_URL;
 const dbName = process.env.DB_NAME;
 
 function createHTMLFile(userHTML) {
-  const filePath = '../FRUITS ON THE WEB/src/html/profile.html';
+  const filePath = './src/html/profile.html';
 
   fs.readFile(filePath, 'utf-8', (error, fileContent) => {
     if (error) {

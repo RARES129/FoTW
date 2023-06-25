@@ -19,8 +19,8 @@ async function generateRSS() {
     const feed = new Feed({
       title: "Leaderboard flux RSS",
       description: "Leaderboard updates",
-      id: "http://localhost:3000/leaderboard",
-      link: "http://localhost:3000/leaderboard",
+      id: "https://fruitsontheweb.onrender.com/leaderboard",
+      link: "https://fruitsontheweb.onrender.com/leaderboard",
       language: "ro",
     });
 
@@ -28,7 +28,7 @@ async function generateRSS() {
       feed.addItem({
         title: user.username,
         id: user.score,
-        link: `http://localhost:3000/leaderboard/users/${user.username}`,
+        link: `https://fruitsontheweb.onrender.com/leaderboard/users/${user.username}`,
         description: `Leaderboard update for ${user.username}`,
         date: new Date(),
       });
@@ -55,7 +55,7 @@ generateRSS().catch((error) => {
 });
 
 function createHTMLFile(userScore) {
-  const filePath = "../FRUITS ON THE WEB/src/html/leaderboard.html";
+  const filePath = './src/html/leaderboard.html';
 
   fs.readFile(filePath, "utf-8", (error, fileContent) => {
     if (error) {

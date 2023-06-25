@@ -22,7 +22,7 @@ function selectFruit(event) {
 
 
 function fetchFruits() {
-    fetch(`http://localhost:3001/game`)
+    fetch(`https://fruitsonthewebserver.onrender.com/game`)
       .then(response => response.json())
       .then(data => {
         const { fruits, score} = data;
@@ -65,7 +65,7 @@ fetchFruits();
 
 
 function restart() {
-  const restartUrl = 'http://localhost:3001/game';
+  const restartUrl = 'https://fruitsonthewebserver.onrender.com/game';
 
   const restartLogic = () => {
     fetch(restartUrl, {
@@ -190,7 +190,7 @@ function moveFruits(selectedElement, destinationElement) {
   selectedElement.parentNode.replaceChild(tempDestination, selectedElement);
   destinationElement.parentNode.replaceChild(tempSelected, destinationElement);
 
-  fetch('http://localhost:3001/game/move', {
+  fetch('https://fruitsonthewebserver.onrender.com/game/move', {
     method: 'POST',
     credentials: 'include',
     headers: {
