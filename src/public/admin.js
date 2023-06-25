@@ -96,4 +96,4 @@ async function updateAdmin() {
 
 updateAdmin();
 
-setInterval(updateAdmin, 5000);
+setInterval(updateAdmin, 1000);

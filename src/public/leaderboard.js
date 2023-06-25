@@ -162,4 +162,4 @@ function generateUserList(users) {
 }
 
 updateLeaderboard();
-setInterval(updateLeaderboard, 5000);
+setInterval(updateLeaderboard, 1000);
