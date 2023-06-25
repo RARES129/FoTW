@@ -206,6 +206,7 @@
               credentials are correct, and then redirects them to the home page
             </li>
             <li>don't have an account?: redirects to the register page</li>
+            <li>reset password: redirects to the reset password page</li>
           </ul>
 
           <p>Register Page</p>
@@ -233,6 +234,45 @@
             </li>
           </ul>
 
+          <p>Reset Password Page</p>
+          <ul>
+            <li>logo: the logo of the game</li>
+            <li>
+              menu: pulls out a menu containing the login, home, help and about
+              pages.
+            </li>
+            <li>login: redirects to the login page</li>
+            <li>home: redirects to the home page</li>
+            <li>help: redirects to the help page</li>
+            <li>username input: accepts the username of the player</li>
+            <li>
+              send button: redirects to the change password page if the user is correct
+            </li>
+            <li>
+              Do you already have an account?: redirects to the login page
+            </li>
+          </ul>
+
+          <p>Change Password Page</p>
+          <ul>
+            <li>logo: the logo of the game</li>
+            <li>
+              menu: pulls out a menu containing the login, home, help and about
+              pages.
+            </li>
+            <li>login: redirects to the login page</li>
+            <li>home: redirects to the home page</li>
+            <li>help: redirects to the help page</li>
+            <li>token input: accepts the token received in the mail</li>
+            <li>password input: accepts the new password</li>
+            <li>
+              reset password button: redirects to the login page if the token is correct
+            </li>
+            <li>
+              Do you already have an account?: redirects to the login page
+            </li>
+          </ul>
+
           <p>About Page</p>
           <ul>
             <li>
@@ -243,6 +283,18 @@
             <li>home: redirects to the home page</li>
             <li>rules: describes the rules of the game</li>
             <li>authors: enumerates the authors and details about them</li>
+          </ul>
+
+          <p>Profile Page</p>
+          <ul>
+            <li>
+              menu: pulls out a menu containing the logout, help and home pages.
+            </li>
+            <li>logout: redirects to the login page</li>
+            <li>help: redirects to the help page</li>
+            <li>home: redirects to the home page</li>
+            <li>profile: describes the profile of the user</li>
+            <li>profile description input: accepts user input, sends it to the database</li>
           </ul>
 
           <p>Help Page</p>
@@ -296,6 +348,20 @@
             <li>quit level: redirects to select level page</li>
           </ul>
         </section>
+
+        <p>Leaderboard page</p>
+          <ul>
+            <li>
+              menu: pulls out a menu containing the logout, home, about and help
+              pages.
+            </li>
+            <li>logout: redirects to the login page</li>
+            <li>home: redirects to the home page</li>
+            <li>about: redirects to the about page</li>
+            <li>help: redirects to the help page</li>
+            <li>table with all the user scores in the app</li>
+          </ul>
+
 
         <p>Admin page</p>
           <ul>
@@ -365,6 +431,25 @@
             </figure>
 
             <figure typeof="sa:image">
+              <figcaption>Reset Password Page</figcaption>
+              <img
+                src="../screenshots/reset_page.jpg"
+                alt="Reset Page Screenshot"
+                width="1000"
+              />
+            </figure>
+            
+            <figure typeof="sa:image">
+              <figcaption>Change Password Page</figcaption>
+              <img
+                src="../screenshots/changepass.jpg"
+                alt="Reset Page Screenshot"
+                width="1000"
+              />
+            </figure>
+
+
+            <figure typeof="sa:image">
               <figcaption>Help Page</figcaption>
               <img
                 src="../screenshots/help_page.jpg"
@@ -377,6 +462,14 @@
               <figcaption>About Page</figcaption>
               <img
                 src="../screenshots/about_page.jpg"
+                alt="About Page Screenshot"
+                width="1000"
+              />
+            </figure>
+            <figure typeof="sa:image">
+              <figcaption>Profile Page</figcaption>
+              <img
+                src="../screenshots/profile.jpg"
                 alt="About Page Screenshot"
                 width="1000"
               />
@@ -450,7 +543,19 @@
 
       <section>
         <h3>4. System Features</h3>
+        <h4>4.0 C4 Diagram</h4>
+     
+        <section>
+        <h4>LEVEL 1</h4>
+        </section>
 
+        <section>
+        <h4>LEVEL 2</h4>
+        </section>
+        <section>
+        <h4>LEVEL 3</h4>
+        </section>
+        
         <section>
           <h4>4.1 Home Page</h4>
 
@@ -467,7 +572,7 @@
             Users of the app can login by entering their credentials and
             therefore access other functionalities of the app or register if
             they do not have an account and navigate to other pages from this
-            page.
+            page, or change the password if forgotten.
           </p>
         </section>
 
@@ -482,7 +587,23 @@
         </section>
 
         <section>
-          <h4>4.4 Help Page</h4>
+          <h4>4.4 Reset Password Page</h4>
+
+          <p>
+            Users of the app can reset their password by entering the username. If the username is correct\
+            they will receive an email on the address provided at registration, containing a token.
+          </p>
+        </section>
+        <section>
+          <h4>4.5 Change Password Page</h4>
+
+          <p>
+            Users of the app can change their password by entering the token received in the email
+            and typing a new passw. After successful completion, the user is redirected to the login page.
+          </p>
+        </section>
+        <section>
+          <h4>4.6 Help Page</h4>
 
           <p>
             Users can send a message that reports issues with the app using
@@ -491,7 +612,7 @@
         </section>
 
         <section>
-          <h4>4.5 About Page</h4>
+          <h4>4.7 About Page</h4>
 
           <p>
             Users can read the rules of the game and some data about the
@@ -500,7 +621,7 @@
         </section>
 
         <section>
-          <h4>4.6 Select Level Page</h4>
+          <h4>4.8 Select Level Page</h4>
 
           <p>
             Users can select levels based on their difficulty and navigate to
@@ -509,7 +630,7 @@
         </section>
 
         <section>
-          <h4>4.7 Game Page</h4>
+          <h4>4.9 Game Page</h4>
 
           <p>
             Users can play the game by matching 3 or more of the same fruit
@@ -519,9 +640,16 @@
             case the user wants to take a break from the current level.
           </p>
         </section>
+        <section>
+          <h4>4.10 Profile Page</h4>
+
+          <p>
+            Users are able to see their details and also complete a description about them.
+          </p>
+        </section>
 
         <section>
-          <h4>4.8 Leaderboard Page</h4>
+          <h4>4.11 Leaderboard Page</h4>
 
           <p>
             Users are able to see their scores beginning from the highest score to the lowest.
@@ -530,7 +658,7 @@
         </section>
 
         <section>
-          <h4>4.9 Admin Page</h4>
+          <h4>4.12 Admin Page</h4>
           <p>
             Certain users that have an admin role will be able to see the username, first name, last name, email and score of all the registered users that have used the application.
             They can also delete any user they'd like and also they can delete all the users at once, emptying the database.
@@ -540,7 +668,8 @@
       </section>
 
       <section>
-        <h3>5. Use of CSS: Motivation</h3>
+        <h3>5. Use of Technologies: Motivation</h3>
+        <h4>5.1 CSS</h4>
         <p>
           To make the app as receptible as possible to primary school children,
           the CSS used includes:
@@ -582,6 +711,60 @@
             users(primary school children) can play on different devices.
           </li>
         </ul>
+        <h4>5.2 Backend: Node.js and Frontend: JavaScript</h4>
+        <ul>
+        <li>
+          JavaScript is a versatile programming language that runs in
+           the browser and enables dynamic and interactive elements on websites.
+        </li>
+
+        <li>
+          Node.js, on the other hand, is a runtime environment that allows
+          JavaScript to be executed on the server-side.
+          It provides a powerful platform for building high-performance web applications.
+        </li>
+
+        <li>
+          JavaScript, combined with Node.js, enables data exchange between the server and the client.
+          Through APIs we can establish communication channels, retrieve data from databases,
+          and send it to the front-end for rendering. 
+        </li>
+      </ul>
+      <h4>5.2 Backend: Database(mongoDB)</h4>
+      <ul>
+      <li>
+        MongoDB is a popular NoSQL database that integrates with JavaScript and Node.js for backend development.
+        It provides a flexible and scalable solution for storing and retrieving data in web applications.
+      </li>
+
+      <li>
+        As a document-oriented database, MongoDB stores data in JSON-like documents, making it a natural fit for 
+        JavaScript-based applications.
+      </li>
+
+      <li>
+        By working with MongoDB's capabilities, JavaScript developers working with Node.js can 
+        efficiently store and retrieve data, build scalable backend systems, and 
+        deliver robust web applications with a flexible and adaptable data layer.
+      </li>
+
+      <li>
+        <figure typeof="sa:image">
+          <figcaption>Our Database structure</figcaption>
+          <img
+            src="../screenshots/database.jpg"
+            alt="Leaderboard Page Screenshot"
+            width="1000"
+          />
+        </figure>
+      </li>
+      <li>
+        It contains the fields: firstName, lastName, email, username, password(encrypted), admin
+        scores for levels 1-12 and overall score. The score field constantly updates, by summing
+        the scores for each level. The admin field determines if a user is an admin, which results
+        in certain privileges in using the app such as: deleting all the users in the database.
+      </li>
+    </ul>
       </section>
 
       <section>

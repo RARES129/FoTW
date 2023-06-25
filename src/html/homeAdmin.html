@@ -8,7 +8,6 @@
     <link rel="stylesheet" type="text/css" href="../css/common.css" />
     <link rel="stylesheet" type="text/css" href="../css/responsive.css" />
     <link rel="icon" type="image/x-icon" href="../css/img/Logo.png" />
-    <!--<script src="../public/home.js"></script> -->
     <title>Home</title>
   </head>
   <body>
@@ -19,16 +18,12 @@
 
     <!-- butoane -->
     <div class="home_buttons">
-      <button id="startGame" onclick="window.location.href='/game';">
+      <button id="startGame" onclick="window.location.href='/game'; setLevelCookie(1);">
         Start New Game
       </button>
       <br />
       <button id="loadGame" onclick="window.location.href='/select_lvl';">
         Load Game
-      </button>
-      <br />
-      <button id="adminPage" onclick="window.location.href='/admin';">
-        Admin Page
       </button>
       <br />
       <button id="leaderboard" onclick="window.location.href='/leaderboard';">
@@ -42,20 +37,25 @@
 
     
 
+
     <!-- top bar -->
     <input class="menu-icon" type="checkbox" id="menu-icon" name="menu-icon" />
     <label for="menu-icon"></label>
     <nav class="nav">
       <ul class="MenuButtons">
+        <li><a id="profile" href="/profile">Profile</a></li>
         <li><a id="help" href="/help">Help</a></li>
         <li><a id="about" href="/about">About</a></li>
+        <li><a id="adminPage" href="/admin">Admin Page</a></li>
         <li><a id="logout" href="/logout">Logout</a></li>
+        
       </ul>
     </nav>
     <script src="../public/ChangeLanguage.js"></script>
+<script>
+function setLevelCookie(levelNumber) {
+  document.cookie = `selectedLevel=${levelNumber}`;
+}</script>
 
-    <script>
-      // Aici trebuie să adăugați codul JavaScript suplimentar, dacă este necesar
-    </script>
   </body>
 </html>

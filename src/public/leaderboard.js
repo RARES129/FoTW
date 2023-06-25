@@ -19,8 +19,8 @@ async function generateRSS() {
     const feed = new Feed({
       title: "Leaderboard flux RSS",
       description: "Leaderboard updates",
-      id: "https://fruitsontheweb.onrender.com/leaderboard",
-      link: "https://fruitsontheweb.onrender.com/leaderboard",
+      id: "https://fruitsonthewebserver.onrender.com/leaderboard",
+      link: "https://fruitsonthewebserver.onrender.com/leaderboard",
       language: "ro",
     });
 
@@ -28,7 +28,7 @@ async function generateRSS() {
       feed.addItem({
         title: user.username,
         id: user.score,
-        link: `https://fruitsontheweb.onrender.com/leaderboard/users/${user.username}`,
+        link: `https://fruitsonthewebserver.onrender.com/leaderboard/users/${user.username}`,
         description: `Leaderboard update for ${user.username}`,
         date: new Date(),
       });

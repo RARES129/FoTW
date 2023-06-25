@@ -46,31 +46,11 @@
         <li><a id="profile" href="/profile">Profile</a></li>
         <li><a id="help" href="/help">Help</a></li>
         <li><a id="about" href="/about">About</a></li>
-        <li><a id="adminPage" href="/admin">Admin Page</a></li>
         <li><a id="logout" href="/logout">Logout</a></li>
         
       </ul>
     </nav>
     <script src="../public/ChangeLanguage.js"></script>
-
-    <script>
-      function checkAdminCookie() {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-          var cookie = cookies[i].trim();
-          if (cookie.indexOf('Admin=1') === 0) {
-            return true; 
-          }
-        }
-        return false; 
-      }
-
-      var isAdminCookieExists = checkAdminCookie();
-      if (!isAdminCookieExists) 
-      {
-        document.getElementById("adminPage").style.display = "none";
-      }
-    </script>
 <script>
 function setLevelCookie(levelNumber) {
   document.cookie = `selectedLevel=${levelNumber}`;

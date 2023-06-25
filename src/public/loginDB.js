@@ -26,15 +26,20 @@ async function handleLoginRequest(req, res) {
       await database.connect();
       const user = await database.findOne("users", { username });
 
-
+      var isAdmin="";
       if (user && bcrypt.compareSync(password, user.password)) {
         const token = generateToken();
-        const isAdmin = user.admin === "1";
+        if(user.admin === "1"){
+          isAdmin = await bcrypt.hash("1", 10);
+        }
+        else{
+          isAdmin = await bcrypt.hash("0", 10);
+        }
 
         res.setHeader("Set-Cookie", [
           `Username=${username}; Path=/;`,
           `Logat=${token}; Path=/;`,
-          `Admin=${isAdmin ? "1" : "0"}; Path=/;`
+          `Admin=${isAdmin}; Path=/;`
         ]);
         res.statusCode = 200;
         res.setHeader("Content-Type", "text/html");

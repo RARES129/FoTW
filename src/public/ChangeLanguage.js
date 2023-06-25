@@ -10,6 +10,8 @@ function changeLanguage() {
       document.getElementById("help").innerText = "Help";
       document.getElementById("about").innerText = "About";
       document.getElementById("logout").innerText = "Logout";
+      document.getElementById("adminPage").innerText = "Admin Page";
+      document.getElementById("profile").innerText = "profile";
     }
     localStorage.setItem("language", "en");
   } else if (language === "en") {
@@ -21,6 +23,8 @@ function changeLanguage() {
       document.getElementById("help").innerText = "Ajutor";
       document.getElementById("about").innerText = "Despre";
       document.getElementById("logout").innerText = "Deconectare";
+      document.getElementById("adminPage").innerText = "Pagina Admin";
+      document.getElementById("profile").innerText = "profil";
     }
     localStorage.setItem("language", "ro");
   }
@@ -42,6 +46,8 @@ if (storedLanguage) {
       document.getElementById("help").innerText = "Help";
       document.getElementById("about").innerText = "About";
       document.getElementById("logout").innerText = "Logout";
+      document.getElementById("adminPage").innerText = "Admin Page";
+      document.getElementById("profile").innerText = "profile";
     } else if (window.location.pathname === "/game") {
       // PAGINA GAME
       document.getElementById("timer").innerText = "Time left:05:00";
@@ -125,6 +131,8 @@ if (storedLanguage) {
       document.getElementById("about").innerText = "Despre";
       document.getElementById("help").innerText = "Ajutor";
       document.getElementById("logout").innerText = "Deconectare";
+      document.getElementById("adminPage").innerText = "Pagina Admin";
+      document.getElementById("profile").innerText = "profil";
     } else if (window.location.pathname === "/game") {
       // PAGINA GAME
       document.getElementById("timer").innerText = "Timp rămas:05:00";

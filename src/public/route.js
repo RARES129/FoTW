@@ -1,5 +1,6 @@
 require("./leaderboard.js");
 require("./admin.js");
+const bcrypt = require("bcrypt");
 var url = require("url");
 var fs = require("fs");
 var appRootPath = require("app-root-path");
@@ -95,7 +96,13 @@ function handleRequest(req, res) {
     fsPath = path.resolve(appRootPath + "/src/html/login.html");
   } else if (requestUrl === "/home") {
     ProfileRoute(req, res);
-    fsPath = path.resolve(appRootPath + "/src/html/home.html");
+    if(isAdmin(req)){
+      fsPath = path.resolve(appRootPath + "/src/html/homeAdmin.html");
+    }
+    else{
+      fsPath = path.resolve(appRootPath + "/src/html/home.html");
+    }
+
   } else if (requestUrl === "/register") {
     fsPath = path.resolve(appRootPath + "/src/html/register.html");
   } else if (requestUrl === "/help") {
@@ -194,7 +201,7 @@ function isLoggedIn(req) {
 
 function isAdmin(req) {
   var cookies = cookie.parse(req.headers.cookie || "");
-  if (cookies.Admin === "1") {
+  if (bcrypt.compareSync("1", cookies.Admin)) {
     return true;
   } else {
     return false;
