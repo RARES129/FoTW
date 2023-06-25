@@ -3,10 +3,18 @@ const { serveStaticFile, resetScore, handleGameRequest, handleMoveRequest , crea
 const fruits = ['banana', 'capsuna', 'orange', 'kiwi', 'strugure', 'applee'];
 const totalColumns = 8;
 const totalRows = 6;
+var Database = require("./database");
 const totalCells = totalColumns * totalRows;
 let fruitElements = [];
 let score = 0;
 
+const db = new Database(process.env.DB_URL, process.env.DB_NAME);
+
+async function startServer() {
+    await db.connect();
+}
+
+startServer();
 
 const server = http.createServer((req, res) => {
   res.setHeader('Access-Control-Allow-Origin', 'https://fruitsontheweb.onrender.com');
