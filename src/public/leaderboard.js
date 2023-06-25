@@ -114,8 +114,6 @@ function createHTMLFile(userScore) {
             <li><a href="/logout">Logout</a></li>
           </ul>
         </nav>
-
-        <script src="../public/leaderboard.js"></script>
       </body>
     </html>`;
 

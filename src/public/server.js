@@ -7,6 +7,15 @@ const totalCells = totalColumns * totalRows;
 let fruitElements = [];
 let score = 0;
 
+var Database = require("./database");
+var http = require("http");
+
+const db = new Database(process.env.DB_URL, process.env.DB_NAME);
+
+async function startServer() {
+    await db.connect();
+}
+
 
 const server = http.createServer((req, res) => {
   res.setHeader('Access-Control-Allow-Origin', 'https://fruitsontheweb.onrender.com');
