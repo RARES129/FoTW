@@ -18,7 +18,7 @@
 
     <!-- butoane -->
     <div class="home_buttons">
-      <button id="startGame" onclick="window.location.href='/game';">
+      <button id="startGame" onclick="window.location.href='/game'; setLevelCookie(1);">
         Start New Game
       </button>
       <br />
@@ -43,10 +43,12 @@
     <label for="menu-icon"></label>
     <nav class="nav">
       <ul class="MenuButtons">
+        <li><a id="profile" href="/profile">Profile</a></li>
         <li><a id="help" href="/help">Help</a></li>
         <li><a id="about" href="/about">About</a></li>
         <li><a id="adminPage" href="/admin">Admin Page</a></li>
         <li><a id="logout" href="/logout">Logout</a></li>
+        
       </ul>
     </nav>
     <script src="../public/ChangeLanguage.js"></script>
@@ -57,10 +59,10 @@
         for (var i = 0; i < cookies.length; i++) {
           var cookie = cookies[i].trim();
           if (cookie.indexOf('Admin=1') === 0) {
-            return true; // Cookie-ul "admin" cu valoarea "1" a fost găsit
+            return true; 
           }
         }
-        return false; // Cookie-ul "admin" cu valoarea "1" nu a fost găsit
+        return false; 
       }
 
       var isAdminCookieExists = checkAdminCookie();
@@ -69,5 +71,10 @@
         document.getElementById("adminPage").style.display = "none";
       }
     </script>
+<script>
+function setLevelCookie(levelNumber) {
+  document.cookie = `selectedLevel=${levelNumber}`;
+}</script>
+
   </body>
 </html>

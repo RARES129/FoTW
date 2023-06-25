@@ -1,104 +1,94 @@
 require("dotenv").config();
 const bcrypt = require("bcrypt");
-var MongoClient = require("mongodb").MongoClient;
+const Database = require("./database");
 
 const mongoURL = process.env.DB_URL;
 const dbName = process.env.DB_NAME;
 
-function handleRegisterRequest(req, res) {
+async function handleRegisterRequest(req, res) {
   let body = "";
   req.on("data", (chunk) => {
     body += chunk.toString();
   });
 
   req.on("end", async () => {
-    const { firstName, lastName, email, username, password } =
-      parseFormData(body);
-    const userByEmail = await findUserByEmail(email);
-    const userByUsername = await findUserByUsername(username);
+    const { firstName, lastName, email, username, password } = parseFormData(body);
+    const database = new Database(mongoURL, dbName);
 
-    if (userByEmail) {
-      res.statusCode = 200;
+    try {
+      await database.connect();
+      const userByEmail = await database.findOne("users", { email });
+      const userByUsername = await database.findOne("users", { username });
+
+      if (userByEmail) {
+        res.statusCode = 200;
+        res.setHeader("Content-Type", "text/html");
+        res.write(`
+          <script>
+            alert("Adresa de email exista deja !!!");
+            window.location.href = "/register";
+          </script>
+        `);
+        res.end();
+      } else if (userByUsername) {
+        res.statusCode = 200;
+        res.setHeader("Content-Type", "text/html");
+        res.write(`
+          <script>
+            alert("Numele de utilizator există deja !!!");
+            window.location.href = "/register";
+          </script>
+        `);
+        res.end();
+      } else {
+        const hashedPassword = await bcrypt.hash(password, 10);
+        await database.insertOne("users", {
+          firstName,
+          lastName,
+          email,
+          username,
+          password: hashedPassword,
+          description: "",
+          score: 0,
+          score1: 0,
+          score2: 0,
+          score3: 0,
+          score4: 0,
+          score5: 0,
+          score6: 0,
+          score7: 0,
+          score8: 0,
+          score9: 0,
+          score10: 0,
+          score11: 0,
+          score12: 0,
+          admin: "0",
+        });
+
+        res.statusCode = 200;
+        res.setHeader("Content-Type", "text/html");
+        res.write(`
+          <script>
+            alert("Contul a fost creat cu succes !!!");
+            window.location.href = "/";
+          </script>
+        `);
+        res.end();
+      }
+    } catch (error) {
+      res.statusCode = 500;
       res.setHeader("Content-Type", "text/html");
       res.write(`
         <script>
-          alert("Adresa de email exista deja !!!");
-          window.location.href = "/register";
-        </script>
-      `);
-      res.end();
-    } else if (userByUsername) {
-      res.statusCode = 200;
-      res.setHeader("Content-Type", "text/html");
-      res.write(`
-        <script>
-          alert("Numele de utilizator există deja !!!");
-          window.location.href = "/register";
-        </script>
-      `);
-      res.end();
-    } else {
-      await insertUser(firstName, lastName, email, username, password);
-      res.statusCode = 200;
-      res.setHeader("Content-Type", "text/html");
-      res.write(`
-        <script>
-          alert("Contul a fost creat cu succes !!!");
+          alert("A aparut o eroare la inregistrare !!!");
           window.location.href = "/";
         </script>
       `);
       res.end();
+    } finally {
+      await database.disconnect();
     }
   });
-}
-
-async function findUserByEmail(email) {
-  const client = new MongoClient(mongoURL);
-  await client.connect();
-
-  const db = client.db(dbName);
-  const collection = db.collection("users");
-
-  const user = await collection.findOne({ email });
-
-  client.close();
-
-  return user;
-}
-
-async function findUserByUsername(username) {
-  const client = new MongoClient(mongoURL);
-  await client.connect();
-
-  const db = client.db(dbName);
-  const collection = db.collection("users");
-
-  const user = await collection.findOne({ username });
-
-  client.close();
-
-  return user;
-}
-
-async function insertUser(firstName, lastName, email, username, password) {
-  const hashedPassword = await bcrypt.hash(password, 10);
-  const client = new MongoClient(mongoURL);
-  await client.connect();
-
-  const db = client.db(dbName);
-  const collection = db.collection("users");
-
-  await collection.insertOne({
-    firstName,
-    lastName,
-    email,
-    username,
-    password: hashedPassword,
-    score: 0,
-    admin: "0",
-  });
-
-  client.close();
 }
 
 function parseFormData(formData) {

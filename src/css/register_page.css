@@ -10,13 +10,17 @@
   align-items: center;
   position: relative;
   display: flex;
-  margin-top: 5%;
+  margin-top: 1%;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 2%;
   animation-duration: 1s;
   animation-name: animate-pop;
   animation-timing-function: cubic-bezier(0.26, 0.53, 0.74, 1.48);
+}
+
+.logo img {
+  margin-top: 3%;
 }
 
 .register input[type="text"],
@@ -75,11 +79,15 @@ input[type="email"] {
 .register .mar {
   position: absolute;
   left: 2%;
-  top: 88%;
+  top: 83%;
+  width: 15%;
+  height: auto;
 }
 
 .register .para {
   position: absolute;
   right: 3%;
-  top: 87%;
+  top: 82%;
+  width: 10%;
+  height: auto;
 }

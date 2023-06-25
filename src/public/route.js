@@ -1,33 +1,46 @@
+require("./leaderboard.js");
+require("./admin.js");
 var url = require("url");
 var fs = require("fs");
 var appRootPath = require("app-root-path");
 var path = require("path");
 var RegisterRoute = require("./registerDB.js");
 var LoginRoute = require("./loginDB.js");
-
+const { ProfileRoute, saveDescription } = require("./profile.js");
+const { resetPassword } = require("./resetPassword.js");
+var changePassword = require("./changePassword.js");
 var LeaderboardRoute = require("./leaderboard.js");
 var AdminRoute = require("./admin.js");
 var sendEmail = require("./help.js");
-const { deleteUsers, fdeleteUser, deleteUser } = require("./deleteUser.js");
-var cookie = require("cookie");
-const Parser = require('rss-parser');
-const parser = new Parser();
+var Database = require("./database");
 
+var cookie = require("cookie");
+const Parser = require("rss-parser");
+const parser = new Parser();
+var http = require("http");
+
+const db = new Database(process.env.DB_URL, process.env.DB_NAME);
+
+async function startServer() {
+    await db.connect();
+}
+
+startServer();
 
 function handleRequest(req, res) {
   var requestUrl = url.parse(req.url).pathname;
   var fsPath;
-  const parts = requestUrl.split('/');
+  const parts = requestUrl.split("/");
   const value = parts[parts.length - 1];
   if (
     (requestUrl === "/home" ||
       requestUrl === "/game" ||
       requestUrl === "/select_lvl" ||
       requestUrl === "/about" ||
-
       requestUrl === "/help" ||
       requestUrl === "/leaderboard" ||
-      requestUrl === "/admin") &&
+      requestUrl === "/admin" ||
+      requestUrl === "/profile") &&
     !isLoggedIn(req)
   ) {
     res.statusCode = 302;
@@ -36,7 +49,20 @@ function handleRequest(req, res) {
     return;
   }
 
-  if ((requestUrl === "/" || requestUrl === "/register") && isLoggedIn(req)) {
+  if (
+    (requestUrl === "/" ||
+      requestUrl === "/register" ||
+      requestUrl === "/reset_password" ||
+      requestUrl === "/change_password") &&
+    isLoggedIn(req)
+  ) {
+    res.statusCode = 302;
+    res.setHeader("Location", "/home");
+    res.end();
+    return;
+  }
+
+  if (requestUrl === "/admin" && !isAdmin(req)) {
     res.statusCode = 302;
     res.setHeader("Location", "/home");
     res.end();
@@ -44,19 +70,21 @@ function handleRequest(req, res) {
   }
 
   if (requestUrl === "/admin/reset" && isAdmin(req)) {
-    deleteUsers();
+    db.deleteAllUsers(); 
     res.statusCode = 302;
     res.setHeader("Location", "/admin");
     res.end();
     return;
-  }
-  else if (requestUrl === `/admin/reset/${value}` && isAdmin(req))  {
-    deleteUser(value);
+  } else if (requestUrl === `/admin/reset/${value}` && isAdmin(req)) {
+    db.deleteUser(value); 
     res.statusCode = 302;
     res.setHeader("Location", "/admin");
     res.end();
     return;
-  } else if(requestUrl === "/admin/reset" || requestUrl === `/admin/reset/${value}`){
+  } else if (
+    requestUrl === "/admin/reset" ||
+    requestUrl === `/admin/reset/${value}`
+  ) {
     res.statusCode = 302;
     res.setHeader("Location", "/home");
     res.end();
@@ -66,6 +94,7 @@ function handleRequest(req, res) {
   if (requestUrl === "/") {
     fsPath = path.resolve(appRootPath + "/src/html/login.html");
   } else if (requestUrl === "/home") {
+    ProfileRoute(req, res);
     fsPath = path.resolve(appRootPath + "/src/html/home.html");
   } else if (requestUrl === "/register") {
     fsPath = path.resolve(appRootPath + "/src/html/register.html");
@@ -77,11 +106,20 @@ function handleRequest(req, res) {
     fsPath = path.resolve(appRootPath + "/src/html/select level.html");
   } else if (requestUrl === "/leaderboard") {
     fsPath = path.resolve(appRootPath + "/src/html/leaderboard.html");
-    res.setHeader("Content-Type", "text/html"); // Adaugă acest rând pentru a seta tipul de conținut al răspunsului la text/html
+    res.setHeader("Content-Type", "text/html"); 
   } else if (requestUrl === "/about") {
     fsPath = path.resolve(appRootPath + "/src/html/about.html");
   } else if (requestUrl === "/admin") {
     fsPath = path.resolve(appRootPath + "/src/html/admin.html");
+
+  } else if (requestUrl === "/reset_password") {
+    fsPath = path.resolve(appRootPath + "/src/html/resetPassword.html");
+  } else if (requestUrl === "/change_password") {
+    fsPath = path.resolve(appRootPath + "/src/html/changePassword.html");
+
+  } else if (requestUrl === "/profile") {
+    fsPath = path.resolve(appRootPath + "/src/html/profile.html");
+
   } else if (path.extname(requestUrl) === ".css") {
     fsPath = path.resolve(appRootPath + "/src" + requestUrl);
     res.setHeader("Content-Type", "text/css");
@@ -98,7 +136,6 @@ function handleRequest(req, res) {
     fsPath = path.resolve(appRootPath + "/src/html/404.html");
   }
 
-  
   if (requestUrl === "/" && req.method === "POST") {
     LoginRoute(req, res);
     return;
@@ -108,13 +145,23 @@ function handleRequest(req, res) {
   } else if (requestUrl === "/help" && req.method === "POST") {
     sendEmail(req, res);
     return;
+  } else if (requestUrl === "/reset_password" && req.method === "POST") {
+    resetPassword(req, res);
+    return;
+  } else if (requestUrl === "/change_password" && req.method === "POST") {
+    changePassword(req, res);
+    return;
+  } else if (requestUrl === "/profile" && req.method === "POST") {
+    saveDescription(req,res);
+    return;
   } else if (requestUrl === "/logout") {
     res.setHeader(
       "Set-Cookie",
       [
         `Username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`,
         `Logat=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`,
-        `Admin=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`
+        `Admin=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`,
+        `selectedLevel=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`
       ]
     );
     res.statusCode = 302;
@@ -123,14 +170,14 @@ function handleRequest(req, res) {
     return;
   }
 
-  fs.stat(fsPath, function (err, stat) {
+  fs.stat(fsPath, async(err, stat) => {
     if (err) {
       console.log("ERROR :(((: " + err);
       res.statusCode = 404;
       res.end();
     } else {
       res.statusCode = 200;
-      fs.createReadStream(fsPath).pipe(res);
+      await fs.createReadStream(fsPath).pipe(res);
     }
   });
 }
@@ -147,7 +194,7 @@ function isLoggedIn(req) {
 
 function isAdmin(req) {
   var cookies = cookie.parse(req.headers.cookie || "");
-  if (cookies.Admin==="1") {
+  if (cookies.Admin === "1") {
     return true;
   } else {
     return false;

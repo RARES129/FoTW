@@ -1,43 +1,18 @@
 .game_page {
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
   grid-gap: 0%;
-  width: 50%;
-  height: 30%;
-  margin: auto;
+  grid-template-columns: repeat(8, 1fr);
   padding: 0.5%;
   background: transparent;
   backdrop-filter: blur(20px);
-  border-radius: 45px;
-  border: 5px solid green;
-  box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.3), 0 0 0 2px green, 0.3em 0.3em 1em black;
+  box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.3), 0 0 0 2px green,
+    0.3em 0.3em 1em black;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
   position: relative;
-  margin-top: -3%;
   margin-bottom: 0%;
-}
-
-.paused {
-  display: none;
-  grid-template-columns: repeat(8, 1fr);
-  grid-gap: 0%;
-  width: 50%;
-  height: 30%;
   margin: auto;
-  padding: 0.5%;
-  background: transparent;
-  backdrop-filter: blur(20px);
-  border-radius: 45px;
-  border: 5px solid green;
-  box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.3), 0 0 0 2px green, 0.3em 0.3em 1em black;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
-  position: relative;
-  margin-top: -3%;
-  margin-bottom: 0%;
 }
 
 .game_page .fruit img {
@@ -48,7 +23,9 @@
   transition: transform 0.2s ease-in-out;
 }
 
-
+.paused {
+  display: none;
+}
 
 .game_page .fruit:hover {
   transform: scale(1.1);
@@ -56,62 +33,30 @@
 
 .score {
   font-family: "Amatic SC", bold;
-  font-size: 40px;
   font-style: normal;
   font-variant: normal;
   font-weight: 700;
   line-height: 90%;
   color: #01d901;
-  text-align: center;
-  margin-right: 85%;
-  margin-top: 2%;
+  text-align: left;
+  margin-left: 5%;
+  margin-top: 0.5%;
+  margin-bottom: 3%;
   text-shadow: 0 0 3px white, 0 0 5px lightgreen;
 }
+
 
 .timer {
   font-family: "Amatic SC", bold;
-  font-size: 60px;
   font-style: normal;
   font-variant: normal;
   font-weight: 700;
   line-height: 90%;
   color: #01d901;
-  text-align: center;
-  margin-right: 77%;
-  margin-top: 3%;
+  text-align: left;
+  margin-left: 5%;
   text-shadow: 0 0 3px white, 0 0 5px lightgreen;
 }
-
-
-.popup {
-  display: none; /* Ascunde pop-up-ul inițial */
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  z-index: 9999;
-}
-
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Opacitate 50% */
-  z-index: 9998; /* Asigură afișarea deasupra conținutului */
-  pointer-events: auto; /* Permite interacțiunea cu elementul */
-}
-
-.overlay.active {
-  display: block; /* Afișează overlay-ul când este activ */
-}
-
-
 
 .game_buttons button {
   font-family: "Amatic SC", bold;
@@ -146,22 +91,3 @@
   box-shadow: 0 0 50px lightgreen, 0 0 50px lightgreen;
 }
 
-@media screen and (max-width: 768px) {
-  .game_page {
-    width: 90%; /* Adjust the width for smaller screens */
-    height: 25%; /* Adjust the height for smaller screens */
-    grid-gap: 2%; /* Increase the gap between fruits for smaller screens */
-    border-width: 3px; /* Adjust the border width for smaller screens */
-    font-size: 12px; /* Adjust the font size for smaller screens */
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .game_page {
-    width: 95%; /* Adjust the width for even smaller screens */
-    height: 20%; /* Adjust the height for even smaller screens */
-    grid-gap: 4%; /* Increase the gap between fruits for even smaller screens */
-    border-width: 2px; /* Adjust the border width for even smaller screens */
-    font-size: 10px; /* Adjust the font size for even smaller screens */
-  }
-}

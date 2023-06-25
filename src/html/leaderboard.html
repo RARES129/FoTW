@@ -1,63 +1,58 @@
 <!DOCTYPE html>
-     <html lang="en">
-       <head>
-         <meta charset="UTF-8" />
-         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-         <link rel="stylesheet" type="text/css" href="../css/leaderboard.css" />
-         <link rel="stylesheet" type="text/css" href="../css/common.css" />
-         <link rel="stylesheet" type="text/css" href="../css/responsive.css" />
-         <link rel="icon" type="image/x-icon" href="../css/img/Logo.png" />
-         <title>Leaderboard</title>
-       </head>
-       <body>
-       
-         <div class="leaderboard" id="leaderboardContainer">
-                              <h2>Leaderboard:</h2>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" type="text/css" href="../css/leaderboard.css" />
+        <link rel="stylesheet" type="text/css" href="../css/common.css" />
+        <link rel="stylesheet" type="text/css" href="../css/responsive.css" />
+        <link rel="icon" type="image/x-icon" href="../css/img/Logo.png" />
+        <title>Leaderboard</title>
+        <style>
+          #user-table {
+            margin: 0 auto;
+            text-align: center;
+          }
 
-           <ul id="user-list">
-           
-    <li>
-      112 -
-      150
-    </li>
+          #user-table th,
+          #user-table td {
+            padding: 10px;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="leaderboard" id="leaderboardContainer">
+          <table id="user-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Score</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+    <tr>
+      <td>111</td>
+      <td>0</td>
+    </tr>
   
-    <li>
-      222 -
-      130
-    </li>
-  
-    <li>
-      333 -
-      110
-    </li>
-  
-    <li>
-      111 -
-      30
-    </li>
-  
-    <li>
-      denis0911 -
-      10
-    </li>
-  
-             
-           </ul>
-         </div>
-     
-         <!-- top bar -->
-         <input class="menu-icon" type="checkbox" id="menu-icon" name="menu-icon" />
-         <label for="menu-icon"></label>
-         <nav class="nav">
-           <ul class="MenuButtons">
-             <li><a href="/">Logout</a></li>
-             <li><a href="/help">Help</a></li>
-             <li><a href="/about">About</a></li>
-             <li><a href="/home"> Home</a></li>
-           </ul>
-         </nav>
-     
-         <script src="../public/leaderboard.js"></script>
-       </body>
-     </html>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- top bar -->
+        <input class="menu-icon" type="checkbox" id="menu-icon" name="menu-icon" />
+        <label for="menu-icon"></label>
+        <nav class="nav">
+          <ul class="MenuButtons">
+          <li><a href="/home"> Home</a></li>
+            <li><a href="/help">Help</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/logout">Logout</a></li>
+          </ul>
+        </nav>
+
+        <script src="../public/leaderboard.js"></script>
+      </body>
+    </html>

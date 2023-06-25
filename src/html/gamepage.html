@@ -11,46 +11,36 @@
   <title>GamePage</title>
 </head>
 <body>
-
   <div id="timer" class="timer">Time left: 5:00</div>
   <div id="score" class="score">Score: 0</div>
-  <div id="moves" class="moves">Moves: 25</div>
 
 
   <div class="game_page">
-    <!-- Fruit grid will be dynamically generated here -->
   </div>
   <div class="game_buttons">
-    <button id="restartButton" onclick="window.location.href='/game';">
+    <button id="restartButton" onclick="restart();">
       Restart level
     </button>
     <br />
     <button id="pauseButton" onclick="toggleTimerDisplay()">Pause</button>
-    <button id="quitLvl" onclick="window.location.href='/home';">
+    <button id="quitLvl" onclick="quitLevel();">
       Quit level
     </button>
   </div>
 
   <!-- top bar -->
-  <input class="menu-icon" type="checkbox" id="menu-icon" name="menu-icon" />
-  <label for="menu-icon"></label>
-  <nav class="nav">
-    <ul class="MenuButtons">
-      <li><a id="home" href="/home">Home</a></li>
-      <li><a id="help" href="/help">Help</a></li>
-      <li><a id="about" href="/about">About</a></li>
-      <li><a id="logout" href="/logout">Logout</a></li>
-    </ul>
-  </nav>
-
-  <!-- Pop-up pentru timpul expirat -->
-  <div id="popup" class="popup">
-    <h2>Time's Up!</h2>
-    <p>The time has expired.</p>
-  </div>
-
-  <script src="../public/ChangeLanguage.js"></script>
-  <script src="../public/client.js"></script>
+    <input class="menu-icon" type="checkbox" id="menu-icon" name="menu-icon" />
+    <label for="menu-icon"></label>
+    <nav class="nav">
+      <ul class="MenuButtons">
+        <li><a id="home" href="/home">Home</a></li>
+        <li><a id="help" href="/help">Help</a></li>
+        <li><a id="about" href="/about">About</a></li>
+        <li><a id="logout" href="/logout">Logout</a></li>
+      </ul>
+    </nav>
+    <script src="../public/ChangeLanguage.js"></script>
+    <script src="../public/client.js"></script>
   <script>
     var time = 5 * 60;
     var isPaused = false;
@@ -71,9 +61,8 @@
       timerElement.textContent = 'Time left: ' + formatTime(time);
 
       if (time === 0) {
-        clearInterval(timerInterval);
-        timerElement.textContent = "Time's up!";
-        showPopup(); // Afișează pop-up-ul când timpul expiră
+        window.location.href ='/select_lvl';
+        alert("Time's up!");
       } else {
         time--;
       }
@@ -95,31 +84,22 @@
     function toggleTimerDisplay() {
       var gamePageElement = document.querySelector('.game_page');
       var pauseButtonElement = document.getElementById('pauseButton');
-      var pauseButtonElement = document.getElementById('popup');
+    
 
       if (gamePageElement.classList.contains('paused')) {
         gamePageElement.classList.remove('paused');
         pauseButtonElement.textContent = 'Pauză';
 
-        // Reia cronometrul
         timerInterval = setInterval(startTimer, 1000);
       } else {
         gamePageElement.classList.add('paused');
         pauseButtonElement.textContent = 'Continua';
 
-        // Oprește cronometrul
         clearInterval(timerInterval);
       }
     }
 
-  function showPopup() {
-  var popupElement = document.getElementById('popup');
-
-  popupElement.style.display = 'block';
-  gamePageElement.classList.add('paused');
-}
-
     timerInterval = setInterval(startTimer, 1000);
   </script>
-</body>
+  </body>
 </html>

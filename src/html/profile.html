@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="stylesheet" type="text/css" href="../css/profile.css" />
+      <link rel="stylesheet" type="text/css" href="../css/common.css" />
+      <link rel="stylesheet" type="text/css" href="../css/responsive.css" />
+      <link rel="icon" type="image/x-icon" href="../css/img/Logo.png" />
+      <title>Profile</title>
+    </head>
+    <body>
+    <div class="logo">
+          <img src="../css/img/LogoNegru2.png" alt="LogoNegru2" /> <br />
+    </div>
+      
+      <div id="user-info"> <h1>Profil utilizator:</h1> 
+        <p><strong>First Name:</strong> Rares-Vasilica</p>
+        <p><strong>Last Name:</strong> Dascalu</p>
+        <p><strong>Email:</strong> dascaluraresm@gmail.com</p>
+        <p><strong>Username:</strong> 111</p>
+        <p><strong>Score:</strong> 0</p>
+        <form method="post" action="/profile" autocomplete="off">
+        <textarea
+          rows="5"
+          cols="50"
+          id="message"
+          name="message"
+          placeholder="*Put your description here"
+          required
+        >11</textarea>
+        <br />
+        <input id="save" type="submit" value="Save" />
+      </form>
+      </div>
+
+      <input class="menu-icon" type="checkbox" id="menu-icon" name="menu-icon" />
+      <label for="menu-icon"></label>
+      <nav class="nav">
+        <ul class="MenuButtons">
+          <li><a href="/home"> Home</a></li>
+          <li><a href="/help">Help</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/logout">Logout</a></li>
+        </ul>
+      </nav>
+    </body>
+    </html>

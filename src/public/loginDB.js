@@ -1,9 +1,10 @@
 require("dotenv").config();
-var url = require("url");
-var fs = require("fs");
-const { MongoClient } = require("mongodb");
-const { v4: uuidv4 } = require("uuid");
+const url = require("url");
+const fs = require("fs");
 const bcrypt = require("bcrypt");
+const Database = require("./database");
+const { v4: uuidv4 } = require("uuid");
+
 const mongoURL = process.env.DB_URL;
 const dbName = process.env.DB_NAME;
 
@@ -11,7 +12,7 @@ function generateToken() {
   return uuidv4();
 }
 
-function handleLoginRequest(req, res) {
+async function handleLoginRequest(req, res) {
   let body = "";
   req.on("data", (chunk) => {
     body += chunk.toString();
@@ -19,51 +20,49 @@ function handleLoginRequest(req, res) {
 
   req.on("end", async () => {
     const { username, password } = parseFormData(body);
-    const user = await findUser(username);
+    const database = new Database(mongoURL, dbName);
 
-    if (user && bcrypt.compareSync(password, user.password)) {
-      const token = generateToken();
-      console.log(user.admin);
+    try {
+      await database.connect();
+      const user = await database.findOne("users", { username });
 
-      if(user.admin === "1"){
-      
-      res.setHeader("Set-Cookie", [`Username=${username}; Path=/;`, `Logat=${token}; Path=/;`,`Admin=1; Path=/;`]);
+
+      if (user && bcrypt.compareSync(password, user.password)) {
+        const token = generateToken();
+        const isAdmin = user.admin === "1";
+
+        res.setHeader("Set-Cookie", [
+          `Username=${username}; Path=/;`,
+          `Logat=${token}; Path=/;`,
+          `Admin=${isAdmin ? "1" : "0"}; Path=/;`
+        ]);
+        res.statusCode = 200;
+        res.setHeader("Content-Type", "text/html");
+        res.write(`
+          <script>
+            alert("Te-ai logat cu succes");
+            window.location.href = "/home";
+          </script>
+        `);
+        res.end();
+      } else {
+        res.setHeader("Content-Type", "text/html");
+        res.write(`
+          <script>
+            alert("Ati introdus gresit username-ul sau parola !!!");
+            window.location.href = "/";
+          </script>
+        `);
+        res.end();
       }
-      else res.setHeader("Set-Cookie", [`Username=${username}; Path=/;`, `Logat=${token}; Path=/;`,`Admin=0; Path=/;`]);
-      res.statusCode = 200;
-      res.setHeader("Content-Type", "text/html");
-      res.write(`
-        <script>
-          alert("Te-ai logat cu succes");
-          window.location.href = "/home";
-        </script>
-      `);
-      res.end();
-    } else {
-      res.setHeader("Content-Type", "text/html");
-      res.write(`
-        <script>
-          alert("Ati introdus gresit username-ul sau parola !!!");
-          window.location.href = "/";
-        </script>
-      `);
-      res.end();
+    } catch (error) {
+      console.error("Failed to handle login request:", error);
+      res.statusCode = 500;
+      res.end("Internal Server Error");
+    } finally {
+      await database.disconnect();
     }
   });
-}
-
-async function findUser(username) {
-  const client = new MongoClient(mongoURL);
-  await client.connect();
-
-  const db = client.db(dbName);
-  const collection = db.collection("users");
-
-  const user = await collection.findOne({ username });
-
-  client.close();
-
-  return user;
 }
 
 function parseFormData(formData) {
@@ -79,4 +78,3 @@ function parseFormData(formData) {
 }
 
 module.exports = handleLoginRequest;
-

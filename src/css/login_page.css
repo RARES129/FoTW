@@ -10,13 +10,17 @@
   align-items: center;
   position: relative;
   display: flex;
-  margin-top: 5%;
+  margin-top: 3%;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 2%;
   animation-duration: 1s;
   animation-name: animate-pop;
   animation-timing-function: cubic-bezier(0.26, 0.53, 0.74, 1.48);
+}
+
+.logo img {
+  margin-top: 3%;
 }
 
 .login input[type="text"],
@@ -39,6 +43,16 @@
   color: green;
   display: block;
   margin-bottom: 5%;
+}
+
+#reset_password {
+  font-family: "Amatic SC";
+  font-weight: bold;
+  text-shadow: 0 0 3px white, 0 0 5px green;
+  font-size: 150%;
+  color: white;
+  display: block;
+  margin-top: 3%;
 }
 
 .login button {
@@ -76,10 +90,19 @@
   position: absolute;
   left: 2%;
   top: 75%;
+  width: 11%;
+  height: auto;
 }
 
 .login .lamaie {
   position: absolute;
   right: 1.5%;
   top: 75%;
+  width: 11%;
+  height: auto;
+}
+
+#spatiere {
+  margin-top: 30%;
+  margin-bottom: 30%;
 }

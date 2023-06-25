@@ -22,62 +22,62 @@
       <div class="level lvl1">
         <h2 id="lvl1">Level 1</h2>
         <p id="easy">Easy</p>
-        <a id="play" href="/game">Play Now</a>
+        <a id="play" href="/game"onclick="setLevelCookie(1)">Play Now</a>
       </div>
       <div class="level lvl2">
         <h2 id="lvl2">Level 2</h2>
         <p id="easy">Easy</p>
-        <a id="play" href="/game">Play Now</a>
+        <a id="play" href="/game" onclick="setLevelCookie(2)">Play Now</a>
       </div>
       <div class="level lvl3">
         <h2 id="lvl3">Level 3</h2>
         <p id="easy">Easy</p>
-        <a id="play" href="/game">Play Now</a>
+        <a id="play" href="/game" onclick="setLevelCookie(3)">Play Now</a>
       </div>
       <div class="level lvl4">
         <h2 id="lvl4">Level 4</h2>
         <p id="easy">Easy</p>
-        <a id="play" href="/game">Play Now</a>
+        <a id="play" href="/game" onclick="setLevelCookie(4)">Play Now</a>
       </div>
       <div class="level lvl5">
         <h2 id="lvl5">Level 5</h2>
         <p id="medium">Easy</p>
-        <a id="play" href="/game">Play Now</a>
+        <a id="play" href="/game" onclick="setLevelCookie(5)">Play Now</a>
       </div>
       <div class="level lvl6">
         <h2 id="lvl6">Level 6</h2>
         <p id="medium">Easy</p>
-        <a id="play" href="/game">Play Now</a>
+        <a id="play" href="/game" onclick="setLevelCookie(6)">Play Now</a>
       </div>
       <div class="level lvl7">
         <h2 id="lvl7">Level 7</h2>
         <p id="medium">Easy</p>
-        <a id="play" href="/game">Play Now</a>
+        <a id="play" href="/game" onclick="setLevelCookie(7)">Play Now</a>
       </div>
       <div class="level lvl8">
         <h2 id="lvl8">Level 8</h2>
         <p id="medium">Easy</p>
-        <a id="play" href="/game">Play Now</a>
+        <a id="play" href="/game" onclick="setLevelCookie(8)">Play Now</a>
       </div>
       <div class="level lvl9">
         <h2 id="lvl9">Level 9</h2>
         <p id="hard">Easy</p>
-        <a id="play" href="/game">Play Now</a>
+        <a id="play" href="/game" onclick="setLevelCookie(9)">Play Now</a>
       </div>
       <div class="level lvl10">
         <h2 id="lvl10">Level 10</h2>
         <p id="hard">Easy</p>
-        <a id="play" href="/game">Play Now</a>
+        <a id="play" href="/game" onclick="setLevelCookie(10)">Play Now</a>
       </div>
       <div class="level lvl11">
         <h2 id="lvl11">Level 11</h2>
         <p id="hard">Easy</p>
-        <a id="play" href="/game">Play Now</a>
+        <a id="play" href="/game" onclick="setLevelCookie(11)">Play Now</a>
       </div>
       <div class="level lvl12">
         <h2 id="lvl12">Level 12</h2>
         <p id="hard">Easy</p>
-        <a id="play" href="/game">Play Now</a>
+        <a id="play" href="/game" onclick="setLevelCookie(12)">Play Now</a>
       </div>
     </div>
 
@@ -93,5 +93,12 @@
       </ul>
     </nav>
     <script src="../public/ChangeLanguage.js"></script>
+
+    <script>
+      function setLevelCookie(levelNumber) {
+        // Set the level number as a cookie
+        document.cookie = `selectedLevel=${levelNumber}`;
+      }
+    </script>
   </body>
 </html>

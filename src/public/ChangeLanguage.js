@@ -90,10 +90,10 @@ if (storedLanguage) {
         "About - Fruits on the Web";
       document.getElementById("rulesTitle").innerText = "Rules";
       document.getElementById("rules").innerText =
-        "The rules of Fruits Game are simple: match three or more fruits of the same type to score points. The more fruits you match in a single move, the higher your score will be. You have a limited number of moves in each level, so use them wisely! Good luck and have fun!";
-      document.getElementById("raresInfo").innerText = "SALUT, SUNT RARES";
-      document.getElementById("vladInfo").innerText = "SALUT, SUNT VLAD";
-      document.getElementById("denisInfo").innerText = "SALUT, SUNT DENIS";
+       " The rules of Fruits Game are simple: match three or more fruits of the  same type to score points. The more fruits you match in a single move, the higher your score will be. You have a limited time on each level! If there are no matches possible left, please restart the level. Good luck and have fun!";
+      document.getElementById("raresInfo").innerText = "Hello, I'm Rares";
+      document.getElementById("vladInfo").innerText = "Hello, I'm Vlad";
+      document.getElementById("denisInfo").innerText = "Hello, I'm Denis";
       document.getElementById("home").innerText = "Home";
       document.getElementById("about").innerText = "About";
       document.getElementById("logout").innerText = "Logout";
@@ -173,10 +173,10 @@ if (storedLanguage) {
         "Despre - Fruits on the Web";
       document.getElementById("rulesTitle").innerText = "Reguli";
       document.getElementById("rules").innerText =
-        "Regulile jocului Fruits on The Web sunt simple: potriviți trei sau mai multe fructe de același tip pentru a obține puncte. Cu cât potriviți mai multe fructe într-o singură mișcare, cu atât scorul va fi mai mare. Ai un număr limitat de mișcări pentru fiecare nivel, așa că folosește-le cu înțelepciune! Noroc si distracție plăcută!";
-      document.getElementById("raresInfo").innerText = "SALUT, SUNT RARES";
-      document.getElementById("vladInfo").innerText = "SALUT, SUNT VLAD";
-      document.getElementById("denisInfo").innerText = "SALUT, SUNT DENIS";
+        "Regulile jocului Fruits on The Web sunt simple: potriviți trei sau mai multe fructe de același tip pentru a obține puncte. Cu cât potriviți mai multe fructe într-o singură mișcare, cu atât scorul va fi mai mare. Ai un timp limitat pentru fiecare nivel! Pentru a câștiga, ai nevoie de un anumit numar de puncte. Daca nu mai sunt mutari disponibile, reîncepe jocul. Noroc si distracție plăcută!";
+      document.getElementById("raresInfo").innerText = "Salut, sunt Rares";
+      document.getElementById("vladInfo").innerText = "Salut, sunt Vlad";
+      document.getElementById("denisInfo").innerText = "Salut, sunt Denis";
       document.getElementById("home").innerText = "Acasă";
       document.getElementById("help").innerText = "Ajutor";
       document.getElementById("logout").innerText = "Deconectare";
