@@ -1,4 +1,5 @@
 Acest joc este o adaptare a renumitului joc Candy Crush. A fost realizat cu HTML, CSS, Node.js, JavaScrip si MongoDB ca baza de date.
+
 Pagina de About:
 ![about_page](https://github.com/RARES129/FoTW/assets/94977726/624d72a5-f84d-4714-a2bc-0d5df742974d)
 Pagina principala a jocului:
